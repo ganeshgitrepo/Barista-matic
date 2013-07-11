@@ -2,6 +2,12 @@ package entity;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="USER")
 public class User {
 	private UUID id;
 	private String userName;
@@ -9,6 +15,8 @@ public class User {
 	private String lastName;
 	private Role role;
 
+	@Entity
+	@Table(name="role")
 	public enum Role { 
 		CUSTOMER {
 			public String toString() {
@@ -34,10 +42,12 @@ public class User {
 		this.setRole(role);
 	}
 
+	@Column(name="id")
 	public String getId() {
 		return id.toString();
 	}
 	
+	@Column(name="user_name")
 	public String getUserName() {
 		return userName;
 	}
@@ -46,6 +56,7 @@ public class User {
 		this.userName = userName;
 	}
 
+	@Column(name="first_name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -54,6 +65,7 @@ public class User {
 		this.firstName = firstName;
 	}
 
+	@Column(name="last_name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -62,6 +74,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	@Column(name="role")
 	public String getRole() {
 		return this.role.toString();
 	}
