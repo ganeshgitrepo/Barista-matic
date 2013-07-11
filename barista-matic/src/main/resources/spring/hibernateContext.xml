@@ -15,10 +15,10 @@
     </bean>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.user}" />
-        <property name="password" value="${jdbc.password}" />
+        <property name="driverClassName" value="${hibernate.driver}" />
+        <property name="url" value="${hibernate.url}" />
+        <property name="username" value="${hibernate.user}" />
+        <property name="password" value="${hibernate.password}" />
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
