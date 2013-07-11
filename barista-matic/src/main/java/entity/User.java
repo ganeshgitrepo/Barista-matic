@@ -82,9 +82,4 @@ public class User {
 	public void setRole(String role) {
 		this.role = Role.valueOf(role);
 	}
-
-	public static void main(String args[]) {
-		User user = new User("jsmith", "John", "Smith", "CUSTOMER");
-		System.out.println(user.getId() + " " + user.getRole());
-	}
 }
