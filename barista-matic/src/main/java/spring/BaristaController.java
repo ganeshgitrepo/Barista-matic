@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/welcome")
-public class LoginController {
+@RequestMapping("/*")
+public class BaristaController {
  
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
