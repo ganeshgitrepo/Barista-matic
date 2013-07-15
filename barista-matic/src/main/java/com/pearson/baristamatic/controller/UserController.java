@@ -1,6 +1,7 @@
 package com.pearson.baristamatic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +15,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
  
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
+	@RequestMapping(value="/users", method=RequestMethod.GET)
+	public ResponseEntity<Void> getUsers(ModelMap model) {
  
-		model.addAttribute("message", "Spring 3 MVC Hello World");
-		return "index";
+		userService.findUsers("*");
+		return null;
 	}
 }

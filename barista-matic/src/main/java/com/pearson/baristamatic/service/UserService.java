@@ -8,5 +8,5 @@ public interface UserService {
 	public User findByUserName(String userName);
 	public void saveUser(User user);
 	public void deleteUser(String userName);
-	List<User> findUsers(String user);
+	public List<User> findUsers(String user);
 }
