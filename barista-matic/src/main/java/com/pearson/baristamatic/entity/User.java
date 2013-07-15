@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
+@Table(name="BARISTA_USER")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -24,8 +24,7 @@ public class User implements Serializable {
 	// No-argument constructor supplied for Hibernate
 	protected User() { }
 	
-	public User(long id, String userName, String password, Role role) {
-		this.id = id;
+	public User(String userName, String password, Role role) {
 		this.userName = userName;
 		this.password = password;
 		this.role = role;
