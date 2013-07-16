@@ -17,13 +17,12 @@ public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private long roleId;				// Unique role ID
-	private RoleType roleType;				// Type of role (i.e. Customer or Administrator)
+	private RoleType roleType;			// Type of role (i.e. Customer or Administrator)
 	
 	// No-argument constructor supplied for Hibernate
 	protected Role() { }
 	
-	public Role(long roleId, RoleType roleType) {
-		this.roleId = roleId;
+	public Role(RoleType roleType) {
 		this.roleType = roleType;
 	}
 
