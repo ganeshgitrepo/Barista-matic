@@ -1,1 +1,11 @@
-/target
+# Eclipse .gitignore
+.settings/
+.project
+.classpath
+
+# Project .gitignore
+target/
+*.class
+*.jar
+*.war
+*.ear
