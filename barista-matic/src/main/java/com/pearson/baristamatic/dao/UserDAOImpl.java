@@ -2,7 +2,6 @@ package com.pearson.baristamatic.dao;
 
 import java.util.List;
 
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -12,13 +11,25 @@ import com.pearson.baristamatic.entity.User;
 public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO {
 
 	@Override
-	public void saveUser(User user) {
+	public User findUser(String userName) {
+		return findByCriteria(Restrictions.like("userName", userName)).get(0);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<User> findUsers() {
+		return getCurrentSession().createQuery("from BARISTA_USER").list();
+	}
+	
+	@Override
+	public void saveOrUpdateUser(User user) {
 		saveOrUpdate(user);
 	}
 
 	@Override
-	public List<User> findUsers(String userName) {
-		return findByCriteria(Restrictions.like("userName", userName, MatchMode.START));
+	public void deleteUser(String userName) {
+		User user = findUser(userName);
+		if (user != null)
+			delete(user);
 	}
-
 }

@@ -9,34 +9,41 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 @SuppressWarnings("unchecked")
 public class GenericDAOImpl<T, I extends Serializable> implements GenericDAO<T, I> {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	private Class<T> entityClass;
+	private Class<T> type;
 
 	public GenericDAOImpl() {
-		this.entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		this.type = (Class<T>) ((ParameterizedType) getClass()
+				.getGenericSuperclass())
+				.getActualTypeArguments()[0];
 	}
 	
-	public Session getCurrentSession() {
+	protected Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public Class<T> getEntityClass() {
-        return entityClass;
+	public Class<T> getType() {
+        return type;
     }
 
+	@Transactional(readOnly = true)
 	@Override
-	public T findById(I id) {
-		return (T) sessionFactory.getCurrentSession().get(getEntityClass(), id);
+	public T find(I id) {
+		return (T) sessionFactory
+				.getCurrentSession()
+				.get(getType(), id);
 	}
 	
+	@Transactional(readOnly = true)
 	@Override
 	public List<T> findByCriteria(Criterion criterion) {
-		Criteria criteria = getCurrentSession().createCriteria(entityClass);
+		Criteria criteria = getCurrentSession().createCriteria(type);
         criteria.add(criterion);
         return criteria.list();
 	}
