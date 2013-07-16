@@ -11,6 +11,26 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:/spring/applicationContext.xml, classpath:/spring/hibernateContext.xml</param-value>
 	</context-param>
+	
+	<!-- 
+		 DelegatingFilterProxy is a Spring Framework class which 
+		 delegates to a filter implementation which is defined as a Spring bean in your application context. 
+		 In this case, the bean is named “springSecurityFilterChain”, 
+		 which is an internal infrastructure bean created by the namespace to handle web security. 
+		 Note that you should not use this bean name yourself. 
+		 Once you've added this to your web.xml, 
+		 you're ready to start editing your application context file. 
+		 Web security services are configured using the <http> element.
+	 -->
+	<filter>
+  		<filter-name>springSecurityFilterChain</filter-name>
+  		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+  		<filter-name>springSecurityFilterChain</filter-name>
+  		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<servlet>
 		<servlet-name>spring</servlet-name>
