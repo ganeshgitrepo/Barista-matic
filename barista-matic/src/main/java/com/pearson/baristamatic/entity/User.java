@@ -60,7 +60,7 @@ public class User implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="ROLE_ID")
+	@JoinColumn(name="ROLE_ID", nullable=false)
 	public Role getRole() {
 		return role;
 	}

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -17,17 +16,15 @@ public class Drink implements Serializable {
 	
 	private long drinkId;				// Unique drink ID
 	private String drinkName;			// Name of drink
-	private Recipe recipe;				// Drink recipe
 	private double cost;				// Associated drink cost
 	private int sales;					// Number of times the drink has been purchased
 	
 	// No-argument constructor supplied for Hibernate
 	protected Drink() { }
 	
-	public Drink(long drinkId, String drinkName, Recipe recipe, double cost, int sales) {
+	public Drink(long drinkId, String drinkName, double cost, int sales) {
 		this.drinkId = drinkId;
 		this.drinkName = drinkName;
-		this.recipe = recipe;
 		this.cost = cost;
 		this.sales = sales;
 	}
@@ -43,7 +40,7 @@ public class Drink implements Serializable {
 		this.drinkId = drinkId;
 	}
 	
-	@Column(name="DRINK_NAME")
+	@Column(name="DRINK_NAME", nullable=false)
 	public String getDrinkName() {
 		return drinkName;
 	}
@@ -52,16 +49,7 @@ public class Drink implements Serializable {
 		this.drinkName = drinkName;
 	}
 	
-	@JoinColumn(name="RECIPE_DRINK_ID")
-	public Recipe getRecipe() {
-		return recipe;
-	}
-
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
-
-	@Column(name="COST")
+	@Column(name="COST", nullable=false)
 	public double getCost() {
 		return cost;
 	}
@@ -70,7 +58,7 @@ public class Drink implements Serializable {
 		this.cost = cost;
 	}
 	
-	@Column(name="SALES")
+	@Column(name="SALES", nullable=false)
 	public int getSales() {
 		return sales;
 	}

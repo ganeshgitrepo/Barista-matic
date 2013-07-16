@@ -43,7 +43,7 @@ public class Ingredient implements Serializable {
 		this.ingredientId = ingredientId;
 	}
 	
-	@Column(name="INGREDIENT_NAME")
+	@Column(name="INGREDIENT_NAME", nullable=false)
 	public String getIngredientName() {
 		return ingredientName;
 	}
@@ -52,7 +52,7 @@ public class Ingredient implements Serializable {
 		this.ingredientName = ingredientName;
 	}
 	
-	@Column(name="COST")
+	@Column(name="COST", nullable=false)
 	public double getIngredientCost() {
 		return ingredientCost;
 	}
@@ -61,7 +61,7 @@ public class Ingredient implements Serializable {
 		this.ingredientCost = ingredientCost;
 	}
 	
-	@Column(name="INVENTORY")
+	@Column(name="INVENTORY", nullable=false)
 	public int getInventory() {
 		return inventory;
 	}
@@ -70,7 +70,7 @@ public class Ingredient implements Serializable {
 		this.inventory = inventory;
 	}
 	
-	@Column(name="PURCHASES")
+	@Column(name="PURCHASES", nullable=false)
 	public int getPurchases() {
 		return purchases;
 	}
