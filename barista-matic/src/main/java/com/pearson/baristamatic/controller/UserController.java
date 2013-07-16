@@ -18,7 +18,7 @@ public class UserController {
 	@RequestMapping(value="/users", method=RequestMethod.GET)
 	public ResponseEntity<Void> getUsers(ModelMap model) {
  
-		userService.findUsers("*");
+		userService.findUsers();
 		return null;
 	}
 }
