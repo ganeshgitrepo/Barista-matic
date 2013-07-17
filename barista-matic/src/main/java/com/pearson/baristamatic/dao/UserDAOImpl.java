@@ -18,7 +18,7 @@ public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<User> findUsers() {
-		return getCurrentSession().createQuery("from BARISTA_USER").list();
+		return getCurrentSession().createQuery("from User").list();
 	}
 	
 	@Override
