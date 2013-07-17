@@ -16,6 +16,22 @@ import com.pearson.baristamatic.entity.User.Role;
 @Transactional(readOnly=true)
 public class UserServiceImpl implements UserService {
 
+	@Override
+	public User findUser(String userName) {
+		return userDAO.findUser(userName);
+	}
+
+	@Override
+	public List<User> findUsers() {
+		return userDAO.findUsers();
+	}
+	
+	@Override
+	public List<User> findUsersInRole(Role role) {
+		return userDAO.findByCriteria(Restrictions.like("role", role));
+	}
+
+	
 	@Autowired
 	private UserDAO userDAO;
 
@@ -32,21 +48,6 @@ public class UserServiceImpl implements UserService {
 		if (user != null) {
 			userDAO.delete(user);
 		}
-	}
-
-	@Override
-	public User findUser(String userName) {
-		return userDAO.findUser(userName);
-	}
-
-	@Override
-	public List<User> findUsers() {
-		return userDAO.findUsers();
-	}
-	
-	@Override
-	public List<User> findUsersInRole(Role role) {
-		return userDAO.findByCriteria(Restrictions.like("role", role));
 	}
 
 	@Override
