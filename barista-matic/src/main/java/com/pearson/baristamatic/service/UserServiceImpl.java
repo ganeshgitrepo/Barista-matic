@@ -18,6 +18,21 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Override
+	public User findUser(String userName) {
+		return userDAO.findUser(userName);
+	}
+
+	@Override
+	public List<User> findUsers() {
+		return userDAO.findUsers();
+	}
+	
+	@Override
+	public List<User> findUsersInRole(Role role) {
+		return userDAO.findByCriteria(Restrictions.like("role", role));
+	}
 
 	@Override
 	@Transactional(readOnly=false)
@@ -32,21 +47,6 @@ public class UserServiceImpl implements UserService {
 		if (user != null) {
 			userDAO.delete(user);
 		}
-	}
-
-	@Override
-	public User findUser(String userName) {
-		return userDAO.findUser(userName);
-	}
-
-	@Override
-	public List<User> findUsers() {
-		return userDAO.findUsers();
-	}
-	
-	@Override
-	public List<User> findUsersInRole(Role role) {
-		return userDAO.findByCriteria(Restrictions.like("role", role));
 	}
 
 	@Override
