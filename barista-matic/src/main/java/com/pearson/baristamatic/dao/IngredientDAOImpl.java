@@ -3,9 +3,11 @@ package com.pearson.baristamatic.dao;
 import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import com.pearson.baristamatic.entity.Ingredient;
 
+@Repository
 public class IngredientDAOImpl extends GenericDAOImpl<Ingredient, String> implements IngredientDAO {
 
 	@Override
