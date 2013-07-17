@@ -12,7 +12,12 @@ public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO
 
 	@Override
 	public User findUser(String userName) {
-		return findByCriteria(Restrictions.like("userName", userName)).get(0);
+		List<User> users = findByCriteria(Restrictions.like("userName", userName));
+		
+		if (users.size() != 1)
+			return null;
+		
+		return users.get(0);
 	}
 
 	@Override
