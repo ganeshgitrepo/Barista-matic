@@ -13,33 +13,39 @@ import com.pearson.baristamatic.entity.User;
 @Service("userService")
 @Transactional(readOnly=true)
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	private UserDAO userDAO;
 
 	@Override
-	public User findByUserName(String userName) {
-		return userDAO.findById(userName);
-	}
-
-	@Override
 	@Transactional(readOnly=false)
-	public void saveUser(User user) {
-	userDAO.saveUser(user);
+	public void saveOrUpdateUser(User user) {
+		userDAO.saveOrUpdateUser(user);
 	}
 
 	@Override
 	@Transactional(readOnly=false)
 	public void deleteUser(String userName) {
-		User user = userDAO.findById(userName);
+		User user = userDAO.findUser(userName);
 		if (user != null) {
 			userDAO.delete(user);
 		}
 	}
 
 	@Override
-	public List<User> findUsers(String user) {
-		return userDAO.findUsers(user);
+	public User findUser(String userName) {
+		return userDAO.findUser(userName);
 	}
 
+	@Override
+	public List<User> findUsers() {
+		return userDAO.findUsers();
+	}
+
+	@Override
+	public void clearUsers() {
+		for (User u : findUsers()) {
+			userDAO.delete(u);
+		}
+	}
 }

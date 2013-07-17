@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pearson.baristamatic.dao.RoleDAO;
 import com.pearson.baristamatic.entity.Role;
+import com.pearson.baristamatic.entity.Role.RoleType;
 
 @Service("roleService")
 @Transactional(readOnly=true)
@@ -16,27 +17,33 @@ public class RoleServiceImpl implements RoleService {
 	private RoleDAO roleDAO;
 	
 	@Override
-	public Role findByRoleName(String roleName) {
-		return roleDAO.findById(roleName);
+	public Role findRole(RoleType roleType) {
+		return roleDAO.findRole(roleType);
+	}
+	
+	@Override
+	public List<Role> findRoles() {
+		return roleDAO.findRoles();
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public void saveOrUpdateRole(Role role) {
+		roleDAO.saveOrUpdateRole(role);
 	}
 
 	@Override
 	@Transactional(readOnly=true)
-	public void saveRole(Role role) {
-		roleDAO.saveRole(role);
-	}
-
-	@Override
-	@Transactional(readOnly=true)
-	public void deleteRole(String roleName) {
-		Role role = roleDAO.findById(roleName);
+	public void deleteRole(RoleType roleType) {
+		Role role = roleDAO.findRole(roleType);
 		if(role!=null)
 			roleDAO.delete(role);
 	}
 
 	@Override
-	public List<Role> findRoles(String role) {
-		return roleDAO.findRoles(role);
+	public void clearRoles() {
+		for (Role r : findRoles()) {
+			roleDAO.delete(r);
+		}
 	}
-
 }
