@@ -1,4 +1,4 @@
-package com.pearson.baristamatic.dao;
+package com.pearson.baristamatic.dao.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.pearson.baristamatic.dao.DrinkDAO;
 import com.pearson.baristamatic.entity.Drink;
 import com.pearson.baristamatic.entity.Ingredient;
 import com.pearson.baristamatic.entity.Recipe;
@@ -13,6 +14,11 @@ import com.pearson.baristamatic.entity.Recipe;
 @Repository
 public class DrinkDAOImpl extends GenericDAOImpl<Drink, String> implements DrinkDAO {
 
+	@Override
+	public Drink findDrink(long drinkId) {
+		return (Drink) getCurrentSession().get(getType(), drinkId);
+	}
+	
 	@Override
 	public Drink findDrink(String drinkName) {
 		return (Drink) getCurrentSession()
@@ -68,4 +74,5 @@ public class DrinkDAOImpl extends GenericDAOImpl<Drink, String> implements Drink
 		if (drink != null)
 			delete(drink);
 	}
+
 }

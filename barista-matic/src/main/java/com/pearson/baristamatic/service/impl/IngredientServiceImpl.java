@@ -1,4 +1,4 @@
-package com.pearson.baristamatic.service;
+package com.pearson.baristamatic.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pearson.baristamatic.dao.IngredientDAO;
 import com.pearson.baristamatic.entity.Ingredient;
+import com.pearson.baristamatic.service.IngredientService;
 
 @Service("ingredientService")
 @Transactional(readOnly=true)

@@ -1,14 +1,20 @@
-package com.pearson.baristamatic.dao;
+package com.pearson.baristamatic.dao.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.pearson.baristamatic.dao.UserDAO;
 import com.pearson.baristamatic.entity.User;
 
 @Repository
 public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO {
 
+	@Override
+	public User findUser(long userId) {
+		return (User) getCurrentSession().get(getType(), userId);
+	}
+	
 	@Override
 	public User findUser(String userName) {
 		return (User) getCurrentSession()
@@ -34,4 +40,5 @@ public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO
 		if (user != null)
 			delete(user);
 	}
+
 }

@@ -1,5 +1,5 @@
 
-package com.pearson.baristamatic.service;
+package com.pearson.baristamatic.service.impl;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pearson.baristamatic.dao.UserDAO;
 import com.pearson.baristamatic.entity.User;
 import com.pearson.baristamatic.entity.User.Role;
+import com.pearson.baristamatic.service.UserService;
 
 @Service("userService")
 @Transactional(readOnly=true)
@@ -18,6 +19,11 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Override
+	public User findUser(long userId) {
+		return userDAO.findUser(userId);
+	}
 
 	@Override
 	public User findUser(String userName) {

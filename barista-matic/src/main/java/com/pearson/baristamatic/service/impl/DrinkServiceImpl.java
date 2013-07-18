@@ -1,4 +1,4 @@
-package com.pearson.baristamatic.service;
+package com.pearson.baristamatic.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +11,7 @@ import com.pearson.baristamatic.dao.DrinkDAO;
 import com.pearson.baristamatic.dao.IngredientDAO;
 import com.pearson.baristamatic.entity.Drink;
 import com.pearson.baristamatic.entity.Ingredient;
+import com.pearson.baristamatic.service.DrinkService;
 
 @Service("drinkService")
 @Transactional(readOnly=true)
@@ -21,6 +22,11 @@ public class DrinkServiceImpl implements DrinkService {
 	
 	@Autowired
 	private IngredientDAO ingredientDAO;
+	
+	@Override
+	public Drink findDrink(long drinkId) {
+		return drinkDAO.findDrink(drinkId);
+	}
 	
 	@Override
 	public Drink findDrink(String drinkName) {

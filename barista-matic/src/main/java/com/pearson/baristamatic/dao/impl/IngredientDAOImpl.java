@@ -1,9 +1,10 @@
-package com.pearson.baristamatic.dao;
+package com.pearson.baristamatic.dao.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.pearson.baristamatic.dao.IngredientDAO;
 import com.pearson.baristamatic.entity.Ingredient;
 
 @Repository

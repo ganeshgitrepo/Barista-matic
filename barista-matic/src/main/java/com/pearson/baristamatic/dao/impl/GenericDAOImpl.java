@@ -1,4 +1,4 @@
-package com.pearson.baristamatic.dao;
+package com.pearson.baristamatic.dao.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -10,6 +10,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.pearson.baristamatic.dao.GenericDAO;
 
 @SuppressWarnings("unchecked")
 public class GenericDAOImpl<T, I extends Serializable> implements GenericDAO<T, I> {
