@@ -56,6 +56,20 @@ public class IngredientServiceImpl implements IngredientService {
 		}
 
 	}
+	
+	@Override
+	@Transactional(readOnly=false)
+	public void consumeIngredient(String ingredientName, int amount) {
+		Ingredient ingredient = findIngredient(ingredientName);
+		if (ingredient == null || ingredient.getInventory() < amount) {
+			return;
+		}
+		
+		int newAmount = ingredient.getInventory() - amount;
+		ingredient.setInventory(newAmount);
+		
+		ingredientDAO.saveOrUpdate(ingredient);
+	}
 
 	@Override
 	@Transactional(readOnly=false)
