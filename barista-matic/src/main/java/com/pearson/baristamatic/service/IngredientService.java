@@ -42,6 +42,16 @@ public interface IngredientService {
 	public void restockIngredients(int amount);
 	
 	/**
+	 * Decrement the inventory of the given Ingredient. If the amount to 
+	 * decrement the Ingredient exceeds the Ingredient's current inventory,
+	 * the inventory will remain unchanged.
+	 * @param ingredientName	Ingredient to be decremented
+	 * @param amount			Amount to decrement ingredient inventory.
+	 */
+	void consumeIngredient(String ingredientName, int amount);
+	
+	
+	/**
 	 * Remove the persisted Ingredient with the given name.
 	 * @param ingredientName		Name of Ingredient to be removed.
 	 */
