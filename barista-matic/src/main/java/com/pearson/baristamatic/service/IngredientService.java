@@ -5,7 +5,7 @@ import java.util.List;
 import com.pearson.baristamatic.entity.Ingredient;
 
 public interface IngredientService {
-	
+
 	/**
 	 * Query for persistent objects in Ingredient class for an Ingredient with 
 	 * the given name.				

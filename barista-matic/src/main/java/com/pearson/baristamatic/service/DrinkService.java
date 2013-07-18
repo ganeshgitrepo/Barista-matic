@@ -9,6 +9,13 @@ import com.pearson.baristamatic.entity.Ingredient;
 public interface DrinkService {
 	
 	/**
+	 * Query for persistent objects in Drink class for a Drink with the given Id.
+	 * @param drinkId		Id of Drink to search for.
+	 * @return				Drink with the given name, otherwise null.
+	 */
+	public Drink findDrink(long drinkId);
+	
+	/**
 	 * Query for persistent objects in Drink class for a Drink with the given name.
 	 * @param drinkName		Name of Drink to search for.
 	 * @return				Drink with the given name, otherwise null.
