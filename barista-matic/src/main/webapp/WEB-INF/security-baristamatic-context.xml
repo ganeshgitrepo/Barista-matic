@@ -11,6 +11,7 @@
         <intercept-url pattern="/logout" access="permitAll" />
         <intercept-url pattern="/accessdenied" access="permitAll" />
         <intercept-url pattern="/**" access="hasRole('CUSTOMER')" />
+        <form-login default-target-url="/index.jsp" always-use-default-target="true"/>
     </http>
 
     <authentication-manager>
