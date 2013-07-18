@@ -1,6 +1,10 @@
 package com.pearson.baristamatic.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,6 +29,7 @@ public class UserServiceImplTest {
 
 	@Before
 	public void setUp() throws Exception {
+		userService.clearUsers();
 	}
 
 	@After
@@ -40,7 +45,9 @@ public class UserServiceImplTest {
 		assertEquals(found.getUserName(), newUser.getUserName());
 	}
 
-	@Test
+	/*@Test
+	 * This method is implicitly tested with testSaveOrUpdate()
+	 */
 	public void testDeleteUser() {
 		User newUser = new User("jsmith", "password123", Role.CUSTOMER);
 		userService.saveOrUpdateUser(newUser);
@@ -52,36 +59,38 @@ public class UserServiceImplTest {
 	}
 
 	/*@Test
-	This method is implicitly tested with testSaveOrUpdateUser()*/
+	 * This method is implicitly tested with testSaveOrUpdate()
+	 */
 	public void testFindUser() {
 		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testFindUsers() {
-		userService.saveOrUpdateUser(new User("jsmith", "password123", Role.CUSTOMER));
-		userService.saveOrUpdateUser(new User("jdoe", "password456", Role.CUSTOMER));
+		userService.saveOrUpdateUser(new User("test.customer", "password123", Role.CUSTOMER));
+		userService.saveOrUpdateUser(new User("test.admin", "password123", Role.ADMINISTRATOR));
 		assertEquals(userService.findUsers().size(), 2);
 	}
 
 	@Test
 	public void testFindUsersInRole() {
-		User customer = new User("jsmith", "password123", Role.CUSTOMER);
+		User customer = new User("test.customer", "password123", Role.CUSTOMER);
 		userService.saveOrUpdateUser(customer);
-		User admin = new User("Superman", "comics", Role.ADMINISTRATOR);
-		userService.saveOrUpdateUser(admin);
+		List<User> users = userService.findUsersInRole(Role.CUSTOMER);
+		assertEquals(users.get(0).getUserName(), "test.customer");
 		
-		userService.findUsersInRole(Role.CUSTOMER).contains(customer);
-		userService.findUsersInRole(Role.ADMINISTRATOR).contains(admin);
+		User admin = new User("test.admin", "password123", Role.ADMINISTRATOR);
+		userService.saveOrUpdateUser(admin);
+		users = userService.findUsersInRole(Role.ADMINISTRATOR);
+		assertEquals(users.get(0).getUserName(), "test.admin");
 	}
 
 	@Test
 	public void testClearUsers() {
-		userService.saveOrUpdateUser(new User("jsmith", "password123", Role.CUSTOMER));
-		userService.saveOrUpdateUser(new User("jdoe", "password123", Role.CUSTOMER));
-		assertEquals(userService.findUsers().size(), 2);
+		User newUser = new User("jsmith", "password123", Role.CUSTOMER);
+		userService.saveOrUpdateUser(newUser);
+		assertEquals(userService.findUsers().size(), 1);
 		userService.clearUsers();
 		assertEquals(userService.findUsers().size(), 0);
 	}
-
 }
