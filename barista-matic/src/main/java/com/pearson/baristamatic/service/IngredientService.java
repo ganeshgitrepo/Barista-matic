@@ -50,7 +50,6 @@ public interface IngredientService {
 	 */
 	void consumeIngredient(String ingredientName, int amount);
 	
-	
 	/**
 	 * Remove the persisted Ingredient with the given name.
 	 * @param ingredientName		Name of Ingredient to be removed.
