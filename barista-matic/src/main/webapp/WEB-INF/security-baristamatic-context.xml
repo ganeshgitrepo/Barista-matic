@@ -14,14 +14,15 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider>
+        <authentication-provider user-service-ref="customUserDetailsService">
+        	<password-encoder hash="md5"></password-encoder>
             <!-- <jdbc-user-service data-source-ref="dataSource"
             users-by-username-query="SELECT USER_NAME,PASSWORD FROM BARISTA_USER WHERE USER_NAME=?"
             authorities-by-username-query="SELECT USER_ROLE FROM BARISTA_USER WHERE USER_NAME=?"
             /> -->
-            <user-service>
+            <!-- <user-service>
                 <user name="lokesh" password="password" authorities="CUSTOMER" />
-            </user-service>
+            </user-service> -->
         </authentication-provider>
     </authentication-manager>
 </beans:beans>
