@@ -15,10 +15,4 @@ public class UserController {
 	@Autowired
 	private UserService userService;
  
-	@RequestMapping(value="/users", method=RequestMethod.GET)
-	public ResponseEntity<Void> getUsers(ModelMap model) {
- 
-		userService.findUsers();
-		return null;
-	}
 }
