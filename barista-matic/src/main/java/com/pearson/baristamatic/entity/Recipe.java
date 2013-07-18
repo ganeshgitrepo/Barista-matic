@@ -54,4 +54,29 @@ public class Recipe implements Serializable {
 	public void setPart(int part) {
 		this.part = part;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((this.drink == null) ? 0 : this.drink.hashCode());
+		result = prime * result + this.part;
+		result = prime * result
+				+ ((this.ingredient == null) ? 0 : this.ingredient.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if((obj == null) || (obj.getClass() != this.getClass()))
+	        return false;
+		if (obj == this)
+			return true;
+		Recipe recipe = (Recipe) obj;
+		
+		return (this.drink == recipe.drink 
+				&& this.ingredient == recipe.ingredient 
+				&& this.part == recipe.part);
+	}
 }
