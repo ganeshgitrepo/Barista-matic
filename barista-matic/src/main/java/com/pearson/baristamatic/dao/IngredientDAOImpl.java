@@ -2,7 +2,6 @@ package com.pearson.baristamatic.dao;
 
 import java.util.List;
 
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.pearson.baristamatic.entity.Ingredient;
@@ -12,12 +11,10 @@ public class IngredientDAOImpl extends GenericDAOImpl<Ingredient, String> implem
 
 	@Override
 	public Ingredient findIngredient(String ingredientName) {
-		List<Ingredient> ingredients = findByCriteria(Restrictions.like("ingredientName", ingredientName));
-		
-		if (ingredients.size() != 1)
-			return null;
-		
-		return ingredients.get(0);
+		return (Ingredient) getCurrentSession()
+				.createQuery("from Ingredient where ingredientName = :ingredientName")
+				.setParameter("ingredientName", ingredientName)
+				.uniqueResult();
 	}
 
 	@Override
