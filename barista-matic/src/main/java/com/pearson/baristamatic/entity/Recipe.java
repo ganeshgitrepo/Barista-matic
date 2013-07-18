@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +27,7 @@ public class Recipe implements Serializable {
 	}
 
 	@Id
-	@OneToOne
+	@ManyToOne
 	public Drink getDrink() {
 		return this.drink;
 	}
