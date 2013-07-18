@@ -52,7 +52,6 @@ public interface UserService {
 	 */
 	public void deleteUser(String userName);
 	
-	
 	/**
 	 * Remove all of the currently persisted Users.
 	 */
