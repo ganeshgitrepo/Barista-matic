@@ -3,6 +3,9 @@
 .project
 .classpath
 
+#Intellij IDEA .gitignore
+.idea
+
 # Project .gitignore
 target/
 *.class
