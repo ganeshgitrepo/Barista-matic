@@ -29,7 +29,7 @@ public class GenericDAOImpl<T, I extends Serializable> implements GenericDAO<T, 
 	}
 	
 	public Class<T> getType() {
-        return type;
+		return type;
     }
 
 	@Transactional(readOnly = true)

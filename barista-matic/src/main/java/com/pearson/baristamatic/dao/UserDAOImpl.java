@@ -2,7 +2,6 @@ package com.pearson.baristamatic.dao;
 
 import java.util.List;
 
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.pearson.baristamatic.entity.User;
@@ -12,12 +11,10 @@ public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO
 
 	@Override
 	public User findUser(String userName) {
-		List<User> users = findByCriteria(Restrictions.like("userName", userName));
-		
-		if (users.size() != 1)
-			return null;
-		
-		return users.get(0);
+		return (User) getCurrentSession()
+				.createQuery("from User where userName = :userName")
+				.setParameter("userName", userName)
+				.uniqueResult();
 	}
 
 	@Override
