@@ -6,6 +6,14 @@ import com.pearson.baristamatic.entity.Ingredient;
 
 public interface IngredientService {
 
+    /**
+     * Query for persistent objects in Ingredient class for a User with the given
+     * ID.
+     * @param ingredientId		Id of Ingredient to search for.
+     * @return					Ingredient with the given Id, otherwise null.
+     */
+    public Ingredient findIngredient(long ingredientId);
+
 	/**
 	 * Query for persistent objects in Ingredient class for an Ingredient with 
 	 * the given name.				

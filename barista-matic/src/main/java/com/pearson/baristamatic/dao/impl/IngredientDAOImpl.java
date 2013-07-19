@@ -10,6 +10,11 @@ import com.pearson.baristamatic.entity.Ingredient;
 @Repository
 public class IngredientDAOImpl extends GenericDAOImpl<Ingredient, String> implements IngredientDAO {
 
+    @Override
+    public Ingredient findIngredient(long ingredientId) {
+        return (Ingredient) getCurrentSession().get(getType(), ingredientId);
+    }
+
 	@Override
 	public Ingredient findIngredient(String ingredientName) {
 		return (Ingredient) getCurrentSession()

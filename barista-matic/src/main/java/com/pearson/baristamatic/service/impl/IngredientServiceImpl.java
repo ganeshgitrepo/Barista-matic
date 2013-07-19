@@ -16,6 +16,11 @@ public class IngredientServiceImpl implements IngredientService {
 
 	@Autowired
 	private IngredientDAO ingredientDAO;
+
+    @Override
+    public Ingredient findIngredient(long ingredientId) {
+        return ingredientDAO.findIngredient(ingredientId);
+    }
 	
 	@Override
 	public Ingredient findIngredient(String ingredientName) {
