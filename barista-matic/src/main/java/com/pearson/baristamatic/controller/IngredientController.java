@@ -4,10 +4,7 @@ import com.pearson.baristamatic.entity.Ingredient;
 import com.pearson.baristamatic.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,7 +27,9 @@ public class IngredientController {
     }
 
     @RequestMapping(value = "/{ingredientId}",  method=RequestMethod.PUT)
-    public @ResponseBody String restockIngredient(@PathVariable long ingredientId, int amount) {
+    public @ResponseBody String restockIngredient(@PathVariable long ingredientId,
+                                                  @RequestParam(value="amount", required = true) int amount) {
+        System.err.println("Amount: " + amount);
         Ingredient ingredient = ingredientService.findIngredient(ingredientId);
         ingredientService.restockIngredient(ingredient.getIngredientName(), amount);
         return "Restocked Ingredient: " + ingredient.getIngredientName();
