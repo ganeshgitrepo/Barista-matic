@@ -1,7 +1,7 @@
 Barista-matic
 =============
 
-Barista-matic is a simple Java EE application which makes use of Spring-MVC, Spring Security, Hiberate, and Angular.JS.
+Barista-matic is a simple Java EE application which makes use of Spring-MVC, Spring Security, Hibernate, and Angular.JS.
 
 Installation
 ============
