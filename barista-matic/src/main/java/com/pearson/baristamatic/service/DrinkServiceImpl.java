@@ -1,4 +1,4 @@
-package com.pearson.baristamatic.service.impl;
+package com.pearson.baristamatic.service;
 
 import java.util.List;
 import java.util.Map;
@@ -11,9 +11,8 @@ import com.pearson.baristamatic.dao.DrinkDAO;
 import com.pearson.baristamatic.dao.IngredientDAO;
 import com.pearson.baristamatic.entity.Drink;
 import com.pearson.baristamatic.entity.Ingredient;
-import com.pearson.baristamatic.service.DrinkService;
 
-@Service("../drinkService")
+@Service("drinkService")
 @Transactional(readOnly=true)
 public class DrinkServiceImpl implements DrinkService {
 
@@ -48,38 +47,42 @@ public class DrinkServiceImpl implements DrinkService {
 	public void saveOrUpdateDrink(Drink drink) {
 		drinkDAO.saveOrUpdateDrink(drink);
 	}
-	
-	@Override
-	@Transactional(readOnly=false)
-	public boolean buyDrink(long drinkId) {
-		Drink drink = drinkDAO.findDrink(drinkId);
-		if (drink == null)
-			return false;
-		
-		Map<Ingredient, Integer> ingredients = findIngredientsInDrink(drink.getDrinkName());
-		// iterate through ingredient Map and check required parts against current inventory
-		for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
-			Ingredient ingredient = i.getKey();
-			int part = i.getValue();
-			
-			if (ingredient.getInventory() < part) {
-				return false;
-			}
-		}
-		// if we got here, we have enough ingredients in stock, so decrement inventory
-		for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
-			Ingredient ingredient = i.getKey();
-			ingredient.setInventory(i.getValue());
-			ingredientDAO.saveOrUpdate(ingredient);
-		}
-		
-		drink.setSales(drink.getSales() + 1);
-		return true;	}
 
-	@Override
+    /* Note: we are duplicating functionality because we have findIngredientsInDrink().
+    we may want to refactor this if we have time later. */
+    @Override
+    public boolean buyDrink(long drinkId) {
+        Drink drink = drinkDAO.findDrink(drinkId);
+
+        if (drink == null)
+            return false;
+
+        Map<Ingredient, Integer> ingredients = findIngredientsInDrink(drink.getDrinkName());
+        // iterate through ingredient Map and check required parts against current inventory
+        for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
+            Ingredient ingredient = i.getKey();
+            int part = i.getValue();
+
+            if (ingredient.getInventory() < part) {
+                return false;
+            }
+        }
+        // if we got here, we have enough ingredients in stock, so decrement inventory
+        for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
+            Ingredient ingredient = i.getKey();
+            ingredient.setInventory(i.getValue());
+            ingredientDAO.saveOrUpdate(ingredient);
+        }
+
+        drink.setSales(drink.getSales() + 1);
+        return true;
+    }
+
+    @Override
 	@Transactional(readOnly=false)
 	public boolean buyDrink(String drinkName) {
-		return buyDrink(findDrink(drinkName).getDrinkId());
+		Drink drink = drinkDAO.findDrink(drinkName);
+        return buyDrink(drink.getDrinkId());
 	}
 
 	@Override

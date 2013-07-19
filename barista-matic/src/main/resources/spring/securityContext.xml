@@ -10,8 +10,9 @@
         <intercept-url pattern="/login" access="permitAll" />
         <intercept-url pattern="/logout" access="permitAll" />
         <intercept-url pattern="/accessdenied" access="permitAll" />
-        <intercept-url pattern="/**" access="hasRole('CUSTOMER')" />
-        <form-login default-target-url="/index.jsp" always-use-default-target="true"/>
+        <intercept-url pattern="/drink" access="hasRole('CUSTOMER')" />
+        <intercept-url pattern="/ingredient" access="hasAnyRole('ADMINISTRATOR')" />
+        <form-login authentication-success-handler-ref="userController"/>
     </http>
 
     <authentication-manager>

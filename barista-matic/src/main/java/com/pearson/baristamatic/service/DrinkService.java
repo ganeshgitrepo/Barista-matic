@@ -44,12 +44,22 @@ public interface DrinkService {
 	 * @param drink			Drink object to persist.
 	 */
 	public void saveOrUpdateDrink(Drink drink);
+
+    /**
+     * Buy a drink. This method decrements the inventory of Ingredients which
+     * make up the Drink's recipe. May fail if the required Ingredient
+     * inventory is too low.
+     * @param drinkId       Id of the Drink to purchase
+     * @return				True if drink purchase is successful, otherwise
+     * 						false.
+     */
+    public boolean buyDrink(long drinkId);
 	
 	/**
 	 * Buy a drink. This method decrements the inventory of Ingredients which
 	 * make up the drink's recipe. May fail if the required Ingredient 
 	 * inventory is too low.
-	 * @param drinkName
+	 * @param drinkName     Name of the Drink to purchase
 	 * @return				True if drink purchase is successful, otherwise 
 	 * 						false.
 	 */

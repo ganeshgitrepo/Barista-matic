@@ -28,8 +28,11 @@ public class DrinkController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{drinkId}", method=RequestMethod.POST)
-    public @ResponseBody String buyDrink(Drink drink) {
-        drinkService.saveOrUpdateDrink(drink);
-        return "Purchased Drink: " + drink.getDrinkName();
+    public @ResponseBody String buyDrink(@PathVariable long drinkId) {
+        boolean success = drinkService.buyDrink(drinkId);
+        if (success)
+            return "Purchased Drink: " + drinkService.findDrink(drinkId).getDrinkName();
+        //TODO Else, throw an exception
+		return "";
     }
 }

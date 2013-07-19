@@ -26,7 +26,13 @@ public class IngredientController {
 
     @RequestMapping(value = "/{ingredientId}")
     public @ResponseBody Ingredient showIngredient(@PathVariable long ingredientId) {
-        //return ingredientService.
-        return null;
+        return ingredientService.findIngredient(ingredientId);
+    }
+
+    @RequestMapping(value = "/{ingredientId}",  method=RequestMethod.POST)
+    public @ResponseBody String restockIngredient(@PathVariable long ingredientId, int amount) {
+        Ingredient ingredient = ingredientService.findIngredient(ingredientId);
+        ingredientService.restockIngredient(ingredient.getIngredientName(), amount);
+        return "Restocked Ingredient: " + ingredient.getIngredientName();
     }
 }
