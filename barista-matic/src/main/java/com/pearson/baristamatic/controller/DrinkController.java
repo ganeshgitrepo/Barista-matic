@@ -27,7 +27,7 @@ public class DrinkController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/{drinkId}", method=RequestMethod.GET)
+    @RequestMapping(value = "/{drinkId}", method=RequestMethod.POST)
     public @ResponseBody String buyDrink(Drink drink) {
         drinkService.saveOrUpdateDrink(drink);
         return "Purchased Drink: " + drink.getDrinkName();
