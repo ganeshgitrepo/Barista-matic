@@ -11,10 +11,13 @@
         <intercept-url pattern="/logout" access="permitAll" />
         <intercept-url pattern="/accessdenied" access="permitAll" />
         <intercept-url pattern="/**" access="hasRole('CUSTOMER')" />
-        <form-login default-target-url="/index.jsp" always-use-default-target="true"/>
+        <form-login authentication-success-handler-ref="loginSuccessHandler"/>
     </http>
+    
+    <beans:bean id="loginSuccessHandler" class="com.pearson.baristamatic.controller.UserController"/>
 
     <authentication-manager>
         <authentication-provider user-service-ref="customUserDetailsService"/>
     </authentication-manager>
+    
 </beans:beans>
