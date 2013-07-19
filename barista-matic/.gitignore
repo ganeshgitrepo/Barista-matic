@@ -1,14 +1,16 @@
-# Eclipse .gitignore
-.settings/
-.project
+# Eclipse
 .classpath
+.project
+.settings/
 
-#Intellij IDEA .gitignore
-.idea
+# Intellij
+.idea/
+*.iml
+*.iws
 
-# Project .gitignore
+# Mac
+.DS_Store
+
+# Maven
+log/
 target/
-*.class
-*.jar
-*.war
-*.ear
