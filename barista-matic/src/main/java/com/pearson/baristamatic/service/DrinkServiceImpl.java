@@ -43,32 +43,41 @@ public class DrinkServiceImpl implements DrinkService {
 		drinkDAO.saveOrUpdateDrink(drink);
 	}
 
-	@Override
+    /* Note: we are duplicating functionality because we have findIngredientsInDrink().
+    we may want to refactor this if we have time later. */
+    @Override
+    public boolean buyDrink(long drinkId) {
+        Drink drink = drinkDAO.findDrink(drinkId);
+
+        if (drink == null)
+            return false;
+
+        Map<Ingredient, Integer> ingredients = findIngredientsInDrink(drink.getDrinkName());
+        // iterate through ingredient Map and check required parts against current inventory
+        for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
+            Ingredient ingredient = i.getKey();
+            int part = i.getValue();
+
+            if (ingredient.getInventory() < part) {
+                return false;
+            }
+        }
+        // if we got here, we have enough ingredients in stock, so decrement inventory
+        for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
+            Ingredient ingredient = i.getKey();
+            ingredient.setInventory(i.getValue());
+            ingredientDAO.saveOrUpdate(ingredient);
+        }
+
+        drink.setSales(drink.getSales() + 1);
+        return true;
+    }
+
+    @Override
 	@Transactional(readOnly=false)
 	public boolean buyDrink(String drinkName) {
 		Drink drink = drinkDAO.findDrink(drinkName);
-		if (drink == null)
-			return false;
-		
-		Map<Ingredient, Integer> ingredients = findIngredientsInDrink(drinkName);
-		// iterate through ingredient Map and check required parts against current inventory
-		for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
-			Ingredient ingredient = i.getKey();
-			int part = i.getValue();
-			
-			if (ingredient.getInventory() < part) {
-				return false;
-			}
-		}
-		// if we got here, we have enough ingredients in stock, so decrement inventory
-		for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
-			Ingredient ingredient = i.getKey();
-			ingredient.setInventory(i.getValue());
-			ingredientDAO.saveOrUpdate(ingredient);
-		}
-		
-		drink.setSales(drink.getSales() + 1);
-		return true;
+        return buyDrink(drink.getDrinkId());
 	}
 
 	@Override
