@@ -38,7 +38,12 @@ public class DrinkServiceImpl implements DrinkService {
 		return drinkDAO.findDrinks();
 	}
 
-	@Override
+    @Override
+    public Map<Ingredient, Integer> findIngredientsInDrink(long drinkId) {
+        return drinkDAO.findIngredientsInDrink(drinkId);
+    }
+
+    @Override
 	public Map<Ingredient, Integer> findIngredientsInDrink(String drinkName) {
 		return drinkDAO.findIngredientsInDrink(drinkName);
 	}
@@ -49,33 +54,37 @@ public class DrinkServiceImpl implements DrinkService {
 		drinkDAO.saveOrUpdateDrink(drink);
 	}
 
-    /* Note: we are duplicating functionality because we have findIngredientsInDrink().
-    we may want to refactor this if we have time later. */
     @Override
     public boolean buyDrink(long drinkId) {
         Drink drink = drinkDAO.findDrink(drinkId);
-
         if (drink == null)
             return false;
 
-        Map<Ingredient, Integer> ingredients = findIngredientsInDrink(drink.getDrinkName());
+        Map<Ingredient, Integer> ingredients = findIngredientsInDrink(drinkId);
         // iterate through ingredient Map and check required parts against current inventory
         for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
-            Ingredient ingredient = i.getKey();
             int part = i.getValue();
 
-            if (ingredient.getInventory() < part) {
+            System.err.println("Ingredient: " + i.getKey().getIngredientName());
+            System.err.println("Inventory: " + i.getKey().getInventory());
+            System.err.println("Parts required: " + part);
+
+            if (i.getKey().getInventory() < part) {
                 return false;
             }
         }
         // if we got here, we have enough ingredients in stock, so decrement inventory
         for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
-            Ingredient ingredient = i.getKey();
-            ingredient.setInventory(i.getValue());
-            ingredientDAO.saveOrUpdate(ingredient);
+            int oldInventory = i.getKey().getInventory();
+            int newInventory = oldInventory - i.getValue();
+            ingredientDAO.setInventory(i.getKey().getIngredientId(), newInventory);
+
+            System.err.println("New " + i.getKey().getIngredientName() + "  inventory: " +
+                    ingredientDAO.findIngredient(i.getKey().getIngredientName()));
         }
 
         drink.setSales(drink.getSales() + 1);
+        saveOrUpdateDrink(drink);
         return true;
     }
 

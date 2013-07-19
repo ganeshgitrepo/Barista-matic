@@ -29,6 +29,15 @@ public interface DrinkService {
 	 * 						empty list.
 	 */
 	public List<Drink> findDrinks();
+
+    /**
+     * Return a Map of ingredients present in the given Drink's recipe
+     * as the key, with the number of parts as the value.
+     * @param drinkId		Id of drink to search for.
+     * @return				List of Ingredient objects that correspond to a drink
+     * 						the given name.
+     */
+    public Map<Ingredient, Integer> findIngredientsInDrink(long drinkId);
 	
 	/**
 	 * Return a Map of ingredients present in the given Drink's recipe 

@@ -1,11 +1,10 @@
 package com.pearson.baristamatic.dao.impl;
 
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
 import com.pearson.baristamatic.dao.IngredientDAO;
 import com.pearson.baristamatic.entity.Ingredient;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class IngredientDAOImpl extends GenericDAOImpl<Ingredient, String> implements IngredientDAO {
@@ -29,7 +28,16 @@ public class IngredientDAOImpl extends GenericDAOImpl<Ingredient, String> implem
 		return getCurrentSession().createQuery("from Ingredient").list();
 	}
 
-	@Override
+    @Override
+    public void setInventory(long ingredientId, int amount) {
+        getCurrentSession().createQuery("update Ingredient set inventory = :inventory where ingredientId = " +
+                ":ingredientId")
+                .setParameter("inventory", amount)
+                .setParameter("ingredientId", ingredientId)
+                .executeUpdate();
+    }
+
+    @Override
 	public void saveOrUpdateIngredient(Ingredient ingredient) {
 		saveOrUpdate(ingredient);
 	}

@@ -10,6 +10,7 @@ public interface DrinkDAO {
 	public Drink findDrink(long drinkId);
 	public Drink findDrink(String drinkName);
 	public List<Drink> findDrinks();
+    public Map<Ingredient, Integer> findIngredientsInDrink(long drinkId);
 	public Map<Ingredient, Integer> findIngredientsInDrink(String drinkName);
 	public void saveOrUpdateDrink(Drink drink);
 	public void deleteDrink(String drinkName);

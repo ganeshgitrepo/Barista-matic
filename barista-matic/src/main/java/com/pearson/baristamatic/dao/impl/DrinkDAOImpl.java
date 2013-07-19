@@ -18,7 +18,7 @@ public class DrinkDAOImpl extends GenericDAOImpl<Drink, String> implements Drink
 	public Drink findDrink(long drinkId) {
 		return (Drink) getCurrentSession().get(getType(), drinkId);
 	}
-	
+
 	@Override
 	public Drink findDrink(String drinkName) {
 		return (Drink) getCurrentSession()
@@ -33,34 +33,36 @@ public class DrinkDAOImpl extends GenericDAOImpl<Drink, String> implements Drink
 		return getCurrentSession().createQuery("from Drink").list();
 	}
 
-	/*
-	 * Because this method must query both the Recipe and Ingredient tables, it
-	 * is implemented in the DAO layer, and not the service layer.
-	 */
+    /*
+     * Because this method must query both the Recipe and Ingredient tables, it
+     * is implemented in the DAO layer, and not the service layer.
+     */
+    @Override
+    public Map<Ingredient, Integer> findIngredientsInDrink(long drinkId) {
+        // find persisted drink
+        Drink drink = findDrink(drinkId);
+        if (drink == null)
+            return null;
+        // get a list of Recipe objects in the drink
+        List<Recipe> recipeEntries = getCurrentSession()
+                .createQuery("from Recipe where drink.drinkId = :drink")
+                .setParameter("drink", drink.getDrinkId())
+                .list();
+
+        // convert the recipe objects to a list of ingredients
+        Map<Ingredient, Integer> ingredients = new HashMap<Ingredient, Integer>();
+        for (Recipe r : recipeEntries) {
+            ingredients.put(r.getIngredient(), r.getPart());
+        }
+
+        return ingredients;
+    }
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Ingredient, Integer> findIngredientsInDrink(String drinkName) {
-		// find persisted drink
-	    Drink drink = findDrink(drinkName);
-		if (drink == null)
-			return null;
-		// get a list of Recipe objects in the drink
-		List<Recipe> recipeEntries = getCurrentSession()
-				.createQuery("from Recipe where drink = :drink")
-				.setParameter("drink", drink)
-				.list();
-
-		// convert the recipe objects to a list of ingredients
-		Map<Ingredient, Integer> ingredients = new HashMap<Ingredient, Integer>();
-		for (Recipe r : recipeEntries) {
-			ingredients.put(((Ingredient) getCurrentSession()
-					.createQuery("from Ingredient where Ingredient = :ingredient")
-					.setParameter("ingredient", r.getIngredient())
-					.uniqueResult()), 
-					r.getPart());
-		}
-
-		return ingredients;
+        Drink drink = findDrink(drinkName);
+        return findIngredientsInDrink(drink.getDrinkId());
 	}
 
 	@Override
