@@ -35,7 +35,7 @@ public class DrinkController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/{drinkId}", method=RequestMethod.POST)
+    @RequestMapping(value = "/{drinkId}", method=RequestMethod.PUT)
     public @ResponseBody String buyDrink(@PathVariable long drinkId) throws IOException {
         boolean success = drinkService.buyDrink(drinkId);
         if (success)
