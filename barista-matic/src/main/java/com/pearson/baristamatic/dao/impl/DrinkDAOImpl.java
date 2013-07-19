@@ -41,12 +41,12 @@ public class DrinkDAOImpl extends GenericDAOImpl<Drink, String> implements Drink
 	@Override
 	public Map<Ingredient, Integer> findIngredientsInDrink(String drinkName) {
 		// find persisted drink
-		Drink drink = findDrink(drinkName);
+	    Drink drink = findDrink(drinkName);
 		if (drink == null)
 			return null;
 		// get a list of Recipe objects in the drink
 		List<Recipe> recipeEntries = getCurrentSession()
-				.createQuery("from Recipe where Recipe.drink = :drink")
+				.createQuery("from Recipe where drink = :drink")
 				.setParameter("drink", drink)
 				.list();
 

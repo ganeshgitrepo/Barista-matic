@@ -29,7 +29,7 @@ public class IngredientController {
         return ingredientService.findIngredient(ingredientId);
     }
 
-    @RequestMapping(value = "/{ingredientId}",  method=RequestMethod.POST)
+    @RequestMapping(value = "/{ingredientId}",  method=RequestMethod.PUT)
     public @ResponseBody String restockIngredient(@PathVariable long ingredientId, int amount) {
         Ingredient ingredient = ingredientService.findIngredient(ingredientId);
         ingredientService.restockIngredient(ingredient.getIngredientName(), amount);
