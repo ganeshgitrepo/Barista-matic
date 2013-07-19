@@ -11,7 +11,7 @@ public interface UserService {
 	 * Query for persistent objects in User class for a User with the given 
 	 * ID.
 	 * @param userId			Id of User to search for.
-	 * @return					User with the given name, otherwise null.
+	 * @return					User with the given Id, otherwise null.
 	 */
 	
 	public User findUser(long userId);
