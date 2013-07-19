@@ -26,9 +26,6 @@
 		<property name="packagesToScan" value="com.pearson.baristamatic.entity" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
-				<!--<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.CMTTransactionFactory</prop>
-				<prop key="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.WebSphereExtendedJTATransactionLookup</prop>-->
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
