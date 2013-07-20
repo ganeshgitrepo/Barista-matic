@@ -8,11 +8,11 @@ import com.pearson.baristamatic.dao.UserDAO;
 import com.pearson.baristamatic.entity.User;
 
 @Repository
-public class UserDAOImpl extends GenericDAOImpl<User, String> implements UserDAO {
+public class UserDAOImpl extends GenericDAOImpl<User, Long> implements UserDAO {
 
 	@Override
 	public User findUser(long userId) {
-		return (User) getCurrentSession().get(getType(), userId);
+		return findById(userId);
 	}
 	
 	@Override

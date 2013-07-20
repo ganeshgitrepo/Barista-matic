@@ -12,11 +12,11 @@ import com.pearson.baristamatic.entity.Ingredient;
 import com.pearson.baristamatic.entity.Recipe;
 
 @Repository
-public class DrinkDAOImpl extends GenericDAOImpl<Drink, String> implements DrinkDAO {
+public class DrinkDAOImpl extends GenericDAOImpl<Drink, Long> implements DrinkDAO {
 
 	@Override
 	public Drink findDrink(long drinkId) {
-		return (Drink) getCurrentSession().get(getType(), drinkId);
+		return findById(drinkId);
 	}
 
 	@Override

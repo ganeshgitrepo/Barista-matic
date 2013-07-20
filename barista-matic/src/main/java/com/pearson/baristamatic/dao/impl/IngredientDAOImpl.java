@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class IngredientDAOImpl extends GenericDAOImpl<Ingredient, String> implements IngredientDAO {
+public class IngredientDAOImpl extends GenericDAOImpl<Ingredient, Long> implements IngredientDAO {
 
     @Override
     public Ingredient findIngredient(long ingredientId) {
-        return (Ingredient) getCurrentSession().get(getType(), ingredientId);
+        return findById(ingredientId);
     }
 
 	@Override
