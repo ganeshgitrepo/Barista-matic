@@ -10,8 +10,8 @@
         <intercept-url pattern="/login" access="permitAll" />
         <intercept-url pattern="/logout" access="permitAll" />
         <intercept-url pattern="/accessdenied" access="permitAll" />
-        <intercept-url pattern="/drink" access="hasRole('CUSTOMER')" />
-        <intercept-url pattern="/ingredient" access="hasAnyRole('ADMINISTRATOR')" />
+        <intercept-url pattern="/drink/*" access="hasRole('CUSTOMER')" />
+        <intercept-url pattern="/ingredient/*" access="hasRole('ADMINISTRATOR')" />
         <form-login authentication-success-handler-ref="userController"/>
     </http>
 
