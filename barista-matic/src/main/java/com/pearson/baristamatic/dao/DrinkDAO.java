@@ -6,7 +6,7 @@ import java.util.Map;
 import com.pearson.baristamatic.entity.Drink;
 import com.pearson.baristamatic.entity.Ingredient;
 
-public interface DrinkDAO {
+public interface DrinkDAO extends GenericDAO<Drink, Long>{
 	public Drink findDrink(long drinkId);
 	public Drink findDrink(String drinkName);
 	public List<Drink> findDrinks();
