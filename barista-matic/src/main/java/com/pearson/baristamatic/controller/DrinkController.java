@@ -39,7 +39,7 @@ public class DrinkController {
     public @ResponseBody String buyDrink(@PathVariable long drinkId) throws IOException {
         boolean success = drinkService.buyDrink(drinkId);
         if (success)
-            return "Purchased Drink: " + drinkService.findDrink(drinkId).getDrinkName();
+            return "Purchased Drink" + drinkService.findDrink(drinkId).getDrinkName();
         else
             throw new IOException("Could not purchase drink.");
     }
