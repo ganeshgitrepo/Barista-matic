@@ -15,7 +15,7 @@ public class IngredientController {
     @Autowired
     private IngredientService ingredientService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public @ResponseBody
     List<Ingredient> showAllIngredients() {
         return ingredientService.findIngredients();

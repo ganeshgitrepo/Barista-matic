@@ -25,16 +25,13 @@ import com.pearson.baristamatic.entity.User.Role;
 public class LoginController implements AuthenticationSuccessHandler {
 
     protected Log logger = LogFactory.getLog(this.getClass());
-
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response, Authentication authentication)
-            throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws IOException, ServletException {
         handle(request, response, authentication);
         clearAuthenticationAttributes(request);
-
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request) {
@@ -43,7 +40,6 @@ public class LoginController implements AuthenticationSuccessHandler {
             return;
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-
     }
 
     private void handle(HttpServletRequest request,
@@ -54,8 +50,6 @@ public class LoginController implements AuthenticationSuccessHandler {
             logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
             return;
         }
-
-
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 

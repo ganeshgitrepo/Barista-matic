@@ -9,8 +9,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:/spring/applicationContext.xml, classpath:/spring/securityContext.xml, classpath:/spring/hibernateContext.xml
-		</param-value>
+		<param-value>classpath:/spring/applicationContext.xml</param-value>
 	</context-param>
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>

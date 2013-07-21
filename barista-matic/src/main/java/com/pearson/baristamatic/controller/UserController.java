@@ -5,11 +5,9 @@ import com.pearson.baristamatic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,12 +18,31 @@ public class UserController {
 	@Autowired
     private UserService userService;
 
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value="/{userId}", method=RequestMethod.GET)
+    public @ResponseBody User showUser(@PathVariable long userId) throws IOException {
+        User user = userService.findUser(userId);
+
+        if (user == null)
+            throw new IOException("The specified drink does not exist.");
+        else
+            return user;
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value="", method= RequestMethod.POST)
     public @ResponseBody Map<String, String> registerUser(User user) {
         userService.saveOrUpdateUser(user);
         Map<String, String> map = new HashMap();
         map.put("Created user", user.getUserName());
+        return map;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IOException.class)
+    public @ResponseBody Map<String, String> userNotFound(IOException ex) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("Error", ex.getMessage());
         return map;
     }
 

@@ -18,10 +18,7 @@ import com.pearson.baristamatic.entity.User;
 import com.pearson.baristamatic.entity.User.Role;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(
-		locations = {
-				"classpath:spring/applicationContext.xml", 
-		"classpath:spring/hibernateContext.xml"})
+@ContextConfiguration(locations={"classpath:spring/applicationContext.xml"})
 public class UserServiceImplTest {
 
 	@Autowired
