@@ -74,9 +74,9 @@ public class UserController implements AuthenticationSuccessHandler {
         }
  
         if (isUser) {
-            return "/drink";
+            return "/api/drink";
         } else if (isAdmin) {
-            return "/ingredient";
+            return "/api/ingredient";
         } else {
             throw new IllegalStateException();
         }
