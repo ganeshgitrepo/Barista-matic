@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value="/report")
-public class ReportingController {
+public class ReportController {
 
     @Autowired
     private DrinkService drinkService;
