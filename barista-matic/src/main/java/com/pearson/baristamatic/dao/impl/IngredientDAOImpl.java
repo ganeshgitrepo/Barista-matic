@@ -29,15 +29,6 @@ public class IngredientDAOImpl extends GenericDAOImpl<Ingredient, Long> implemen
 	}
 
     @Override
-    public void setInventory(long ingredientId, int amount) {
-        getCurrentSession().createQuery("update Ingredient set inventory = :inventory where ingredientId = " +
-                ":ingredientId")
-                .setParameter("inventory", amount)
-                .setParameter("ingredientId", ingredientId)
-                .executeUpdate();
-    }
-
-    @Override
 	public void saveOrUpdateIngredient(Ingredient ingredient) {
 		saveOrUpdate(ingredient);
 	}

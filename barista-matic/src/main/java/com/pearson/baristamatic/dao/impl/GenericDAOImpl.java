@@ -54,6 +54,7 @@ public class GenericDAOImpl<T, I extends Serializable> implements GenericDAO<T, 
     @Override
     public void saveOrUpdate(T transientObject) {
         getCurrentSession().saveOrUpdate(transientObject);
+        getCurrentSession().flush();
     }
 
     @Transactional(readOnly = false)

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -27,11 +28,14 @@ public class IngredientController {
     }
 
     @RequestMapping(value = "/{ingredientId}",  method=RequestMethod.PUT)
-    public @ResponseBody String restockIngredient(@PathVariable long ingredientId,
-                                                  @RequestParam(value="amount", required = true) int amount) {
-        System.err.println("Amount: " + amount);
+    public @ResponseBody String restockIngredient(@PathVariable long ingredientId, @RequestParam(value="amount",
+            required = true) int amount) throws IOException {
         Ingredient ingredient = ingredientService.findIngredient(ingredientId);
-        ingredientService.restockIngredient(ingredient.getIngredientName(), amount);
-        return "Restocked Ingredient: " + ingredient.getIngredientName();
+        if (ingredient == null)
+            throw new IOException("Could not locate ingredient.");
+        else {
+            ingredientService.restockIngredient(ingredient.getIngredientName(), amount);
+            return "Restocked Ingredient" + ingredient.getIngredientName();
+        }
     }
 }

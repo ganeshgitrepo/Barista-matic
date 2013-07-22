@@ -27,7 +27,6 @@ public class DrinkController {
     @RequestMapping(value="/{drinkId}", method=RequestMethod.GET)
     public @ResponseBody Drink showDrink(@PathVariable long drinkId) throws IOException {
         Drink drink = drinkService.findDrink(drinkId);
-
         if (drink == null)
             throw new IOException("The specified drink does not exist.");
         else
@@ -36,19 +35,14 @@ public class DrinkController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{drinkId}", method=RequestMethod.PUT)
-    public @ResponseBody String buyDrink(@PathVariable long drinkId) throws IOException {
+    public @ResponseBody Map<String, String> buyDrink(@PathVariable long drinkId) throws IOException {
         boolean success = drinkService.buyDrink(drinkId);
-        if (success)
-            return "Purchased Drink" + drinkService.findDrink(drinkId).getDrinkName();
+        if (success) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("Purchased Drink", drinkService.findDrink(drinkId).getDrinkName());
+            return map;
+        }
         else
             throw new IOException("Could not purchase drink.");
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(IOException.class)
-    public @ResponseBody Map<String, String> handleDrinkNotFound(IOException ex) {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("Error", ex.getMessage());
-        return map;
     }
 }
