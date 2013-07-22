@@ -6,7 +6,7 @@ app.config(function ($routeProvider) {
         .when('/login',
             {
                 controller:     'LoginCtrl',
-                templateUrl:    'partials/login.html'
+                templateUrl:    'ng-app/partials/login.html'
             })
         .when('/drink',
             {

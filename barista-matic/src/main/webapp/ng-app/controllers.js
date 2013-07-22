@@ -1,5 +1,6 @@
-angular.module('barista-matic',[]);
+app.controller('LoginCtrl', function($scope) {
 
+});
 /*
 LoginCtrl = function($scope, $resource, Base64, $http) {
     // Use this method for Angular 1.0.x.
