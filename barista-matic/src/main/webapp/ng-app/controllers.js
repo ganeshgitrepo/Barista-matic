@@ -1,5 +1,6 @@
 angular.module('barista-matic',[]);
 
+/*
 LoginCtrl = function($scope, $resource, Base64, $http) {
     // Use this method for Angular 1.0.x.
     // Logs into a page protected by basic authentication.  Grabs
@@ -16,4 +17,4 @@ LoginCtrl = function($scope, $resource, Base64, $http) {
     // restore old defaults
     $http.defaults.headers.common.Authorization = 'Basic ';
     };
-}
+}*/
