@@ -18,6 +18,8 @@ public class Drink implements Serializable {
 	private String drinkName;			// Name of drink
 	private double cost;				// Associated drink cost
 	private int sales;					// Number of times the drink has been purchased
+    // TODO Implement inStock functionality
+    private boolean inStock;            // Whether the drink is instock or not
 	
 	// No-argument constructor supplied for Hibernate
 	protected Drink() { }
