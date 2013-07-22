@@ -75,15 +75,18 @@ public class DrinkServiceImpl implements DrinkService {
         }
         // if we got here, we have enough ingredients in stock, so decrement inventory
         for (Map.Entry<Ingredient, Integer> i : ingredients.entrySet()) {
-            int oldInventory = i.getKey().getInventory();
-            int newInventory = oldInventory - i.getValue();
-            ingredientDAO.setInventory(i.getKey().getIngredientId(), newInventory);
-
+            Ingredient ingredient = i.getKey();
+            int amount = i.getValue();
+            int oldInventory = ingredient.getInventory();
+            int newInventory = oldInventory - amount;
+            ingredient.setInventory(newInventory);
+            ingredientDAO.saveOrUpdateIngredient(ingredient);
             System.err.println("New " + i.getKey().getIngredientName() + "  inventory: " +
                     ingredientDAO.findIngredient(i.getKey().getIngredientName()));
         }
 
         drink.setSales(drink.getSales() + 1);
+        System.err.println("Drink sales: " + drink.getSales());
         saveOrUpdateDrink(drink);
         return true;
     }
