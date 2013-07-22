@@ -24,7 +24,7 @@ public class UserController {
         User user = userService.findUser(userId);
 
         if (user == null)
-            throw new IOException("The specified drink does not exist.");
+            throw new IOException("The specified user does not exist.");
         else
             return user;
     }
@@ -35,14 +35,6 @@ public class UserController {
         userService.saveOrUpdateUser(user);
         Map<String, Long> map = new HashMap<String, Long>();
         map.put("Created user", user.getUserId());
-        return map;
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(IOException.class)
-    public @ResponseBody Map<String, String> userNotFound(IOException ex) {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("Error", ex.getMessage());
         return map;
     }
 
