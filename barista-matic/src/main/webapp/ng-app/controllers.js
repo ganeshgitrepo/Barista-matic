@@ -2,6 +2,22 @@ app.controller('NavCtrl', function($scope) {
 
 });
 
+app.controller('DrinkCtrl', function($scope) {
+	$scope.drinks= [
+	  {"name": "Coffee",
+	   "cost": "$3.85"},
+	   {"name": "Latte",
+	   "cost": "$2.85"},
+	   {"name": "Americano",
+	   "cost": "$3.85"}
+	                ];
+	
+	$scope.buyDrink = function(drink){
+		$scope.selection = drink;
+		console.log($scope.selection);
+	};
+});
+
 app.controller('LoginCtrl',  function($scope, $http, $location, userService) {
     // check if the user is logged in
     isLoggedIn();
