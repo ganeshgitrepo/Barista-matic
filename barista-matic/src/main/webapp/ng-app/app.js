@@ -1,4 +1,4 @@
-var app = angular.module('barista-matic', ['ngResource', 'ngCookies']);
+var app = angular.module('barista-matic', ['services']);
 // configure the routes and associate each view with a controller
 app.config(function ($routeProvider, $httpProvider) {
     $routeProvider
