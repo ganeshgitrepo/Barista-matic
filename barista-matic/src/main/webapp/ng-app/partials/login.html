@@ -1,7 +1,7 @@
-<form class="form-signin" action="j_spring_security_check" method="post">
+<div class="form-signin">
     <h2 class="form-signin-heading">Please sign in</h2>
-    <input type="text" class="input-block-level" name="j_username" placeholder="User name">
-    <input type="password" class="input-block-level" name="j_password" placeholder="Password">
-    <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+    <input type="text" class="input-block-level" ng-model="username" placeholder="User name">
+    <input type="password" class="input-block-level" ng-model="password" placeholder="Password">
+    <button class="btn btn-large btn-primary" ng-click="$scope.doSubmit">Sign in</button>
     <a href="register" class="btn btn-large">Register</a>
-</form>
+</div>
