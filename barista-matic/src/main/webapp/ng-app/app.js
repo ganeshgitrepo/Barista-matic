@@ -1,6 +1,6 @@
-var app = angular.module('barista-matic', ['ngResource', 'ur.http.auth']);
+var app = angular.module('barista-matic', ['ngResource', 'ngCookies']);
 // configure the routes and associate each view with a controller
-app.config(function ($routeProvider, $httpProvider, requestQueueProvider) {
+app.config(function ($routeProvider, $httpProvider) {
     $routeProvider
         .when('/login',
             {
@@ -10,18 +10,17 @@ app.config(function ($routeProvider, $httpProvider, requestQueueProvider) {
         .when('/drink',
             {
                 controller:     'DrinkCtrl',
-                templateUrl:    'partials/drink.html'
+                templateUrl:    'ng-app/partials/drink.html'
             })
         .when('/ingredient',
             {
                 controller:     'IngredientCtrl',
-                templateUrl:    'partials/ingredient.html'
+                templateUrl:    'ng-app/partials/ingredient.html'
             })
         .when('/report',
             {
                 controller:     'ReportCtrl',
-                templateUrl:    'partials/drink.html'
+                templateUrl:    'ng-app/partials/report.html'
             })
         .otherwise({redirectTo: '/login' });
-    requestQueueProvider.subscribeTo($httpProvider);
 });
