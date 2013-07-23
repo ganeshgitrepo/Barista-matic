@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="/roles", method=RequestMethod.GET)
+    @RequestMapping(value="/role", method=RequestMethod.GET)
     public @ResponseBody Collection<GrantedAuthority> getUserRoles() throws IOException {
         return (Collection<GrantedAuthority>) SecurityContextHolder
                 .getContext()
