@@ -1,4 +1,18 @@
-<div>
+<div id="windowTitleDialog" class="modal hide fade" tabindex="-1"
+	role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">&times;</button>
+		<h3 id="myModalLabel">Bill</h3>
+	</div>
+	<div class="modal-body">
+		<p>The cost of your {{ selection.name }} is {{ selection.cost }} </p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">OK!</button>
+	</div>
+</div>
+<div class="row-fluid">
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -7,33 +21,14 @@
 				<th style="width: 20%">Purchase</th>
 			</tr>
 		</thead>
-		<tr>
-			<td>Coffee</td>
-			<td>$3.85</td>
+		<tr ng-repeat="drink in drinks">
+			<td>{{drink.name}}</td>
+			<td>{{drink.cost}}</td>
 			<td>
-			<div class="divButtons">
-			<a href="#" class="btn btn-mini btn-primary">Buy this !</a>
-			</div>
+				<button class="btn btn-mini btn-primary" data-toggle="modal"
+					data-target="#windowTitleDialog" ng-click="buyDrink (drink);">Buy
+					this !</button>
 			</td>
 		</tr>
-		<tr>
-			<td>Americano</td>
-			<td>$3.3</td>
-			<td><a href="#" class="btn btn-mini btn-primary">Buy this !</a></td>
-		</tr>
-		<tr>
-			<td>Latte</td>
-			<td>$2.85</td>
-			<td><a href="#" class="btn btn-mini btn-primary">Buy this !</a></td>
-		</tr>
 	</table>
-<!-- 	<div id="windowTitleDialog" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true" style="display: block;">
-		<div class="modal-header">
-			<a href="#" class="close" data-dismiss="modal" onclick="closeDialog ();">&times;</a>
-			<h3>Total cost of purchase is $3.85</h3>
-		</div>
-		<div class="modal-footer">
-			 <a href="#" class="btn btn-primary" onclick="okClicked ();">OK</a>
-		</div>
-	</div> -->
 </div>

@@ -37,10 +37,7 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
             var userPass = username + ':' + password;
             var base64 = window.btoa(unescape(encodeURIComponent(userPass)));
             $http.defaults.headers.common['Authorization'] = 'Basic ' + base64;
-            $http({
-                method: 'GET',
-                url: 'api/user/role'
-            }).success(function(data, status, headers, config) {
+            $http.get('api/user/role').success(function(data, status, headers, config) {
                 console.log("We are authenticated!");
                 // store authorization token
                 var authToken = headers('Auth-Token');
@@ -57,14 +54,11 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
             userService.setUserDetails(undefined, null, false);
         }
     }]).
-    factory('drinkService', function() {
+    factory('drinkService', function($http) {
         var service = {};
 
         service.getDrinks = function() {
-            $http({
-                method: 'GET',
-                url: 'api/drink/'
-            }).success(function(data, status, headers, config) {
+            $http.get('api/drink').success(function(data, status, headers, config) {
                 console.log("Successfully received drinks.");
                 console.log("Data: " + data);
             })

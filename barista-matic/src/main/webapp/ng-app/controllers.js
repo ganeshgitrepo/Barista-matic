@@ -1,5 +1,11 @@
-app.controller('LoginCtrl',  function($scope, $location, userAuthService, userService) {
+app.controller('NavCtrl', function($scope, $location, userService) {
+    $scope.$watch(function showNav() {
+        $scope.isLoggedIn = userService.getUserDetails().isLoggedIn;
+        $scope.username = userService.getUserDetails().username;
+    });
+});
 
+app.controller('LoginCtrl',  function($scope, $location, userAuthService, userService) {
     $scope.$watch(function redirectUser() {
         var role = userService.getUserDetails().role;
         if (role == "CUSTOMER") {
@@ -8,7 +14,7 @@ app.controller('LoginCtrl',  function($scope, $location, userAuthService, userSe
             $location.path('/ingredient').replace();
         }
     });
-
+    
     $scope.login = function(user) {
         if ($scope.user == undefined) {
             return;
@@ -17,18 +23,23 @@ app.controller('LoginCtrl',  function($scope, $location, userAuthService, userSe
     }
 });
 
-app.controller('NavCtrl', function($scope, $location, userService) {
-    $scope.$watch(function showNav() {
-        $scope.isLoggedIn = userService.getUserDetails().isLoggedIn;
-        $scope.username = userService.getUserDetails().username;
-    });
-});
-
 app.controller('LogoutCtrl', function($scope, $location, userAuthService) {
     userAuthService.logout();
     $location.path('/login').replace();
 });
 
-app.controller('DrinkCtrl', function($scope, drinkService) {
-
+app.controller('DrinkCtrl', function($scope) {
+	$scope.drinks= [
+	  {"name": "Coffee",
+	   "cost": "$3.85"},
+	   {"name": "Latte",
+	   "cost": "$2.85"},
+	   {"name": "Americano",
+	   "cost": "$3.85"}
+	                ];
+	
+	$scope.buyDrink = function(drink){
+		$scope.selection = drink;
+		console.log($scope.selection);
+	};
 });
