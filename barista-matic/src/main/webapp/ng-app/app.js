@@ -1,10 +1,15 @@
-var app = angular.module('barista-matic', ['ngResource', 'ngCookies']);
+var app = angular.module('barista-matic', ['services']);
 // configure the routes and associate each view with a controller
 app.config(function ($routeProvider, $httpProvider) {
     $routeProvider
         .when('/login',
             {
                 controller:     'LoginCtrl',
+                templateUrl:    'ng-app/partials/login.html'
+            })
+        .when('/logout',
+            {
+                controller:     'LogoutCtrl',
                 templateUrl:    'ng-app/partials/login.html'
             })
         .when('/drink',
