@@ -16,12 +16,30 @@
     <script src="assets/js/angular-resource.min.js"></script>
     <script src="ng-app/app.js"></script>
     <script src="ng-app/controllers.js"></script>
-
+    
+<!--     <script>
+		$(document).ready(function() {
+			$('#windowTitleDialog').bind('show', function() {
+			});
+		});
+		function closeDialog() {
+			$('#windowTitleDialog').modal('hide');
+		};
+		function okClicked() {
+			closeDialog();
+		};
+	</script>
+	<link
+		href="http://static.scripting.com/github/bootstrap2/css/bootstrap.css"
+		rel="stylesheet">
+	<script src="http://static.scripting.com/github/bootstrap2/js/jquery.js"></script>
+	<script
+		src="http://static.scripting.com/github/bootstrap2/js/bootstrap-transition.js"></script>
+	<script
+		src="http://static.scripting.com/github/bootstrap2/js/bootstrap-modal.js"></script>	 -->
 </head>
 <body>
 <div ng-include="'ng-app/partials/navbar-user.html'"></div>
-
-<div class="container"></div> <!-- /container -->
-
+<div class="span12"><div ng-include="'ng-app/partials/drinkMenu.html'"></div></div>
 </body>
 </html>
