@@ -2,14 +2,18 @@
     <div class="navbar-inner">
         <div class="container-fluid">
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" />
-            <a class="brand span2">Barista-matic</a>
+            <a class="brand span2" href="#/">Barista-matic</a>
             <div class="nav-collapse collapse">
                 <ul class="nav span8">
-                    <li class="active"><a href="#">Ingredients</a></li>
-                    <li><a href="#login">Report</a></li>
+                    <!-- Customer links -->
+                    <li><a href="#/drink">Order Drinks</a></li>
+                    <!-- Administrator links -->
+                    <li><a href="#/ingredient">Restock Ingredients</a></li>
+                    <li><a href="#/report">View Report</a></li>
                 </ul>
                     <ul class="nav pull-right">
                         <li class="active navbar-text">Welcome, {{username}}!</li>
+                        <li><a href="#/logout">Logout</a></li>
                     </ul>
             </div><!--/.nav-collapse -->
         </div>
