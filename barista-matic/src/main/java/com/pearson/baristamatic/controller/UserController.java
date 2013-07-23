@@ -4,10 +4,14 @@ import com.pearson.baristamatic.entity.User;
 import com.pearson.baristamatic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +19,7 @@ import java.util.Map;
 @RequestMapping(value="/user")
 public class UserController {
 
-	@Autowired
+    @Autowired
     private UserService userService;
 
     @ResponseStatus(HttpStatus.OK)
@@ -27,6 +31,15 @@ public class UserController {
             throw new IOException("The specified user does not exist.");
         else
             return user;
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value="/roles", method=RequestMethod.GET)
+    public @ResponseBody Collection<GrantedAuthority> getUserRoles() throws IOException {
+        return (Collection<GrantedAuthority>) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getAuthorities();
     }
 
     @ResponseStatus(HttpStatus.CREATED)

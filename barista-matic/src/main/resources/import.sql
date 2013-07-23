@@ -1,7 +1,7 @@
 -- Insert Users
-insert into BARISTA_USER (user_id, user_name, password, user_role) values (1, 'test.admin', 'password123', 'ADMINISTRATOR');
+insert into BARISTA_USER (user_id, user_name, password, user_role) values (1, 'admin', 'password123', 'ADMINISTRATOR');
 
-insert into BARISTA_USER (user_id, user_name, password, user_role) values (2, 'test.customer', 'password123', 'CUSTOMER');
+insert into BARISTA_USER (user_id, user_name, password, user_role) values (2, 'customer', 'password123', 'CUSTOMER');
 
 -- Insert Ingredients
 insert into BARISTA_INGREDIENT (ingredient_id, ingredient_name, cost, inventory, purchases) values (1, 'Coffee',  0.75, 10, 0);

@@ -20,7 +20,7 @@
     <mvc:annotation-driven/>
 
     <!-- Spring Security -->
-    <security:http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
+    <security:http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="never">
         <security:intercept-url pattern="/login" access="permitAll"/>
         <security:intercept-url pattern="/logout" access="permitAll"/>
         <security:intercept-url pattern="/api/drink/**" access="hasRole('CUSTOMER')"/>
@@ -29,8 +29,7 @@
         <security:http-basic/>
     </security:http>
     <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider user-service-ref="userDetailsService" />
-        <security:authentication-provider ref="authenticationProvider" />
+        <security:authentication-provider ref='restAuthenticationProvider' />
     </security:authentication-manager>
 
     <bean id="userDetailsService" class="com.pearson.baristamatic.service.impl.UserServiceImpl"></bean>

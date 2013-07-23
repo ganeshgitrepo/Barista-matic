@@ -1,21 +1,21 @@
-app.controller('LoginCtrl', function($scope) {
-
+app.controller('LoginCtrl', function($scope, $http) {
+    $scope.login = function(user) {
+        if ($scope.user == undefined) {
+            return;
+        }
+        var userPass = $scope.user.username + ':' + $scope.user.password;
+        var base64 = window.btoa(unescape(encodeURIComponent(userPass)));
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + base64;
+        $http({
+            method : 'GET',
+            url : 'api/user/roles'
+            }).success(function(data, status, headers, config) {
+                console.log("We are authenticated!");
+                var authToken = headers('Auth-Token');
+                $http.defaults.headers.common['Auth-Token'] = authToken;
+                $http.defaults.headers.common['Authorization'] = ' ';
+            }).error(function(data, status, headers, config) {
+                console.log("We could not authenticate successfully.");
+            });
+    }
 });
-/*
-LoginCtrl = function($scope, $resource, Base64, $http) {
-    // Use this method for Angular 1.0.x.
-    // Logs into a page protected by basic authentication.  Grabs
-    // username and password from $scope, which would likely be bound to
-    // "text" and "password" <input> tags, respectively.
-    scope.login = function login() {
-    // modify the Authorization header to send the username & password
-    $http.defaults.headers.common.Authorization = 'Basic ' +
-    Base64.encode($scope.username + ':' + $scope.password);
-    // get the Resource object.
-    $scope.res = $resource('/api/');
-    // need to actually execute the request; do whatever with this
-    $scope.res.get();
-    // restore old defaults
-    $http.defaults.headers.common.Authorization = 'Basic ';
-    };
-}*/
