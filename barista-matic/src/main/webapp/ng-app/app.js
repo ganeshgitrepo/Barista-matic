@@ -7,6 +7,11 @@ app.config(function ($routeProvider, $httpProvider) {
                 controller:     'LoginCtrl',
                 templateUrl:    'ng-app/partials/login.html'
             })
+        .when('/logout',
+            {
+                controller:     'LogoutCtrl',
+                templateUrl:    'ng-app/partials/login.html'
+            })
         .when('/drink',
             {
                 controller:     'DrinkCtrl',

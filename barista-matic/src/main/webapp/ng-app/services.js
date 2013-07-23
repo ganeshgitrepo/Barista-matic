@@ -10,12 +10,12 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
             return service;
         }
 
-        service.setUserDetails = function(username, role) {
+        service.setUserDetails = function(username, role, isLoggedIn) {
             service.username = username;
             $cookieStore.put("username", username);
             service.role = role;
             $cookieStore.put("role", role);
-            service.isLoggedIn = true;
+            service.isLoggedIn = isLoggedIn;
             $cookieStore.put
         };
 
@@ -47,10 +47,14 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
                 // set HTTP headers
                 $http.defaults.headers.common['Auth-Token'] = authToken;
                 $http.defaults.headers.common['Authorization'] = ' ';
-                userService.setUserDetails(username, data[0].authority);
+                userService.setUserDetails(username, data[0].authority, true);
             }).error(function(data, status, headers, config) {
                 console.log("We could not authenticate successfully.");
             });
+        };
+
+        this.logout = function() {
+            userService.setUserDetails(undefined, null, false);
         }
     }]).
     factory('drinkService', function() {
