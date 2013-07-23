@@ -1,7 +1,7 @@
-<div class="form-signin">
+<form class="form-signin" ng-submit="login(user)">
     <h2 class="form-signin-heading">Please sign in</h2>
-    <input type="text" class="input-block-level" ng-model="username" placeholder="User name">
-    <input type="password" class="input-block-level" ng-model="password" placeholder="Password">
-    <button class="btn btn-large btn-primary" ng-click="$scope.doSubmit">Sign in</button>
+    <input type="text" class="input-block-level" ng-model="user.username" placeholder="User name">
+    <input type="password" class="input-block-level" ng-model="user.password" placeholder="Password">
+    <input class="btn btn-large btn-primary" type="submit" value="Sign in" />
     <a href="register" class="btn btn-large">Register</a>
-</div>
+</form>
