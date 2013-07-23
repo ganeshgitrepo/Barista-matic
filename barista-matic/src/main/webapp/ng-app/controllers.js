@@ -25,11 +25,8 @@ app.controller('NavCtrl', function($scope, $location, userService) {
 });
 
 app.controller('LogoutCtrl', function($scope, $location, userAuthService) {
-    init();
-    function init() {
-        userAuthService.logout();
-        $location.path('/login').replace();
-    }
+    userAuthService.logout();
+    $location.path('/login').replace();
 });
 
 app.controller('DrinkCtrl', function($scope, drinkService) {
