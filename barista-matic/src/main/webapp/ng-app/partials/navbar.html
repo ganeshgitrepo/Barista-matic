@@ -1,12 +1,14 @@
 <div class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavCtrl" ng-show="isLoggedIn">
     <div class="navbar-inner">
-        <div class="container-fluid">
+        <div>
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" />
             <a class="brand span2" href="#/">Barista-matic</a>
             <div class="nav-collapse collapse">
-                <ul class="nav span8">
-                    <!-- Customer links -->
+                <!-- Customer links -->
+                <ul class="nav" ng-show="isCustomer">
                     <li><a href="#/drink">Order Drinks</a></li>
+                </ul>
+                <ul class="nav" ng-show="isAdmin">
                     <!-- Administrator links -->
                     <li><a href="#/ingredient">Restock Ingredients</a></li>
                     <li><a href="#/report">View Report</a></li>

@@ -34,12 +34,15 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="/role", method=RequestMethod.GET)
-    public @ResponseBody Collection<GrantedAuthority> getUserRoles() throws IOException {
-        return (Collection<GrantedAuthority>) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getAuthorities();
+    @RequestMapping(value="/auth", method=RequestMethod.POST)
+    public @ResponseBody Map<String, String> getAuthenticatedUser() {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user = userService.findUser(userName);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("userId", Long.toString(user.getUserId()));
+        map.put("userName", user.getUserName());
+        map.put("role", user.getRole().toString());
+        return map;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
