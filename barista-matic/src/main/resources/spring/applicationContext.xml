@@ -21,8 +21,9 @@
 
     <!-- Spring Security -->
     <security:http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="never">
-        <security:intercept-url pattern="/login" access="permitAll"/>
-        <security:intercept-url pattern="/logout" access="permitAll"/>
+        <!--<security:intercept-url pattern="/login" access="permitAll"/>
+        <security:intercept-url pattern="/logout" access="permitAll"/> -->
+        <security:intercept-url pattern="/api/user/auth/*" access="permitAll"/>
         <security:intercept-url pattern="/api/drink/**" access="hasRole('CUSTOMER')"/>
         <security:intercept-url pattern="/api/ingredient/**" access="hasRole('ADMINISTRATOR')"/>
         <security:intercept-url pattern="/api/reports/**" access="hasRole('ADMINISTRATOR')"/>
