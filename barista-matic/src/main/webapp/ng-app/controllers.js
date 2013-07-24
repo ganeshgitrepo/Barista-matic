@@ -47,7 +47,10 @@ app.controller('DrinkCtrl', function($scope) {
 	};
 });
 
-app.controller('IngredientCtrl', function($scope) {
+app.controller('IngredientCtrl', function($scope,ingredientService) {
+	
+	var ingredients = ingredientService.getIngredients();
+	console.log(ingredients);
 	
 	$scope.inventory = [ {
 		"ingredient" : "Coffee",

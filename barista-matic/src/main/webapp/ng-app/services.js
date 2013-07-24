@@ -67,4 +67,17 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
         }
 
         return service;
-    });
+    }).
+    factory('ingredientService', function($http) {
+		var service = {};
+	
+		service.getIngredients = function() {
+			$http.get('api/ingredient').success(function(data, status, headers, config) {
+				console.log("Successfully received ingredients.");
+				console.log("Data: " + data);
+			}).error(function(data, status, headers, config) {
+				console.log("we couldn't get ingredients.");
+			})
+		}
+		return service;
+	});
