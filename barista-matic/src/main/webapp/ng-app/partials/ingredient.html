@@ -1,0 +1,40 @@
+<div id="windowTitleDialog" class="modal hide fade" tabindex="-1"
+	role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">&times;</button>
+		<h3 id="myModalLabel">Total Units</h3>
+	</div>
+	<div class="modal-body">
+		<p> {{ selection.ingredientName }} is at {{ selection.inventory }} units </p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">OK!</button>
+	</div>
+</div>
+<div class="row-fluid">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th style="width: 50$">Ingredient</th>
+				<th style="width: 10%">Inventory</th>
+				<th style="width: 20%">Restock Amount</th>
+				<th style="width: 20%">Restock</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="ingredient in ingredients">
+			<td>{{ingredient.ingredientName}}</td>
+			<td>{{ingredient.inventory}}</td>
+			<td><input ng-model="ingredient.ingredientId" placeholder="Enter restocked amount"/></td>
+			<td>
+				<button id="{{ ingredient.ingredientName }}" type="submit" class="btn btn-mini btn-primary" data-toggle="modal"
+					data-target="#windowTitleDialog" ng-click="restock(ingredient, ingredient.ingredientId)">Restock
+					Ingredient</button>
+			</td>
+		</tr>
+	</table>
+	
+	<button type="submit" class="btn btn-primary"
+		data-target="#windowTitleDialog" ng-click="restock(ingredient);">Restock each
+		by 10</button>
+</div>
