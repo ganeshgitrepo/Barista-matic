@@ -46,7 +46,7 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
         return service;
     }).
     service('userAuthService', function($http, userService) {
-        this.login = function(username, password) {
+        this.login = function(username, password, callback) {
             var userPass = username + ':' + password;
             var base64 = window.btoa(unescape(encodeURIComponent(userPass)));
             var customHeaders = 'Basic ' + base64;
@@ -54,10 +54,9 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
             $http.post('api/user/auth').success(function(data, status, headers, config) {
                 console.log("User is authenticated.");
                 userService.setUserDetails(data.userId, username, customHeaders, data.role);
-                return true;
             }).error(function(data, status, headers, config) {
                 console.log("We could not authenticate successfully.");
-                return false;
+                callback("Wrong username or password.");
             });
         };
 

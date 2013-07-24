@@ -8,11 +8,17 @@ app.controller('LoginCtrl', function ($scope, $location, userAuthService, userSe
         }
     });
 
+    $scope.$watch(function displayLoginMsg() {
+        
+    });
+
     $scope.login = function (user) {
         if (typeof $scope.user === 'undefined') {
             return;
         }
-        userAuthService.login($scope.user.username, $scope.user.password);
+            userAuthService.login($scope.user.username, $scope.user.password, function(response) {
+                $scope.loginMsg = response;
+            })
     };
 });
 
@@ -34,7 +40,7 @@ app.controller('DrinkCtrl', function ($scope, drinkService) {
 
         drinkService.buyDrink(drink, function(response) {
             $scope.receipt = response;
-        });
+        })
     };
 });
 
