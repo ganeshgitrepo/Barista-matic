@@ -54,9 +54,8 @@ app.controller('IngredientCtrl', function($scope,ingredientService) {
 		$scope.ingredients = response;
 	});
 
-	$scope.restock = function(ingredient) {
+	$scope.restock = function(ingredient, amount, response) {
 		$scope.selection = ingredient;
-		$scope.selection.currentUnits=ingredient.currentUnits;
-		console.log($scope.selection.currentUnits);
+		console.log($scope.selection.inventory);
 	};
 });

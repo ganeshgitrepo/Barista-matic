@@ -86,5 +86,15 @@ factory('ingredientService', function($http) {
 			callback(data);
 		})
 	}
+	
+	service.restockIngredient = function(ingredient, amount, callback) {
+		$http.put('api/ingredient'.concat(ingredient.ingredientName).concat("?amount=" + amount)).success(function(data, status, headers, config) {
+			console.log("Ingredient restocked.");
+			callback(data);
+		})
+	}
+	
+	//TODO implement restockIngredients() for every ingredient
+	
 	return service;
 });
