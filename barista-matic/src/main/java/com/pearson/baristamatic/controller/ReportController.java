@@ -20,44 +20,44 @@ import java.util.Map;
 @RequestMapping(value="/report")
 public class ReportController {
 
-    @Autowired
-    private DrinkService drinkService;
+	@Autowired
+	private DrinkService drinkService;
 
-    @Autowired
-    private IngredientService ingredientService;
+	@Autowired
+	private IngredientService ingredientService;
 
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="/orders", method=RequestMethod.GET)
-    public @ResponseBody Map<String, Integer> getDrinkOrders() {
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        List<Drink> drinks = drinkService.findDrinks();
-        for (Drink d : drinks) {
-            map.put(d.getDrinkName(), d.getSales());
-        }
-        return map;
-    }
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value="/orders", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Integer> getDrinkOrders() {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		List<Drink> drinks = drinkService.findDrinks();
+		for (Drink d : drinks) {
+			map.put(d.getDrinkName(), d.getSales());
+		}
+		return map;
+	}
 
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="/financials", method=RequestMethod.GET)
-    public @ResponseBody Map<String, Double> getFinancials() {
-        Map<String, Double> map = new HashMap<String, Double>();
-        double profit = 0.00;
-        double expenses = 0.00;
-        List<Drink> drinks = drinkService.findDrinks();
-        for (Drink d : drinks) {
-            profit += (d.getSales() * d.getCost());
-        }
-        map.put("Profit", profit);
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value="/financials", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Double> getFinancials() {
+		Map<String, Double> map = new HashMap<String, Double>();
+		double profit = 0.00;
+		double expenses = 0.00;
+		List<Drink> drinks = drinkService.findDrinks();
+		for (Drink d : drinks) {
+			profit += (d.getSales() * d.getCost());
+		}
+		map.put("Profit", profit);
 
-        List<Ingredient> ingredients = ingredientService.findIngredients();
-        for (Ingredient i : ingredients) {
-            expenses += (i.getPurchases() * i.getIngredientCost());
-        }
-        map.put("Expenses", expenses);
+		List<Ingredient> ingredients = ingredientService.findIngredients();
+		for (Ingredient i : ingredients) {
+			expenses += (i.getPurchases() * i.getIngredientCost());
+		}
+		map.put("Expenses", expenses);
 
-        // calculate total net profit
-        double netProfit = profit - expenses;
-        map.put("Net Profit", netProfit);
-        return map;
-    }
+		// calculate total net profit
+		double netProfit = profit - expenses;
+		map.put("Net Profit", netProfit);
+		return map;
+	}
 }

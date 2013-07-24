@@ -16,27 +16,31 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th style="width: 50$">Ingredient</th>
-				<th style="width: 10%">Inventory</th>
-				<th style="width: 20%">Restock Amount</th>
-				<th style="width: 20%">Restock</th>
+				<th style="width: 20%">Ingredient</th>
+				<th style="width: 20%">Cost / Unit</th>
+				<th  style="width: 20%">Inventory</th>
+				<th>Restock Amount</th>
+				<th>Restock</th>
 			</tr>
 		</thead>
 		<tr ng-repeat="ingredient in ingredients">
 			<td>{{ingredient.ingredientName}}</td>
+			<td>{{ingredient.ingredientCost | currency}}</td>
 			<td>{{ingredient.inventory}}</td>
-			<td><input ng-model="ingredient.restockAmount" placeholder="Enter amount to order"/></td>
+			<td><input ng-model="ingredient.restockAmount"
+				placeholder="Enter amount to order" /></td>
 			<td>
-				<button id="{{ ingredient.ingredientName }}" type="submit" class="btn btn-mini btn-primary"
-                        data-toggle="modal" data-target="#windowTitleDialog"
-                        ng-click="restockIngredient(ingredient, ingredient.restockAmount)">Restock Ingredient
-                </button>
+				<button id="{{ ingredient.ingredientName }}" type="submit"
+					class="btn btn-mini btn-primary" data-toggle="modal"
+					data-target="#windowTitleDialog"
+					ng-click="restockIngredient(ingredient, ingredient.restockAmount)">Restock
+					Ingredient</button>
 			</td>
 		</tr>
 	</table>
 </div>
 <div class="center">
-    <button type="submit" class="btn btn-primary"
-            data-target="#windowTitleDialog" ng-click="restockIngredients(ingredients, 10)">Restock All
-    </button>
+	<button type="submit" class="btn btn-primary"
+		data-target="#windowTitleDialog"
+		ng-click="restockIngredients(ingredients, 10)">Restock All</button>
 </div>
