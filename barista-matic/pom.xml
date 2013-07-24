@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pearson.ltg</groupId>
 	<artifactId>barista-matic</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>barista-matic</name>
 	<url>http://maven.apache.org</url>
