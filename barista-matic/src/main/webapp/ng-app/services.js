@@ -61,6 +61,8 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
             $http.get('api/drink').success(function(data, status, headers, config) {
                 console.log("Successfully received drinks.");
                 console.log("Data: " + data);
+            }).error(function(data, status, headers, config) {
+            	console.log("we couldn't get drinks.");
             })
         }
 
