@@ -65,7 +65,7 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
 		userService.destroyUserDetails();
 	}
 }).
-service('drinkService', function($http) {
+service('drinkService', function($http, $filter) {
 	this.getDrinks = function(callback) {
 		$http.get('api/drink').success(function(data, status, headers, config) {
 			console.log("Received drinks.");
