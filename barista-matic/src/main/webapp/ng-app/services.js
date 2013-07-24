@@ -65,33 +65,53 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
 		userService.destroyUserDetails();
 	}
 }).
-factory('drinkService', function($http) {
-	var service = {};
-	service.getDrinks = function(callback) {
+service('drinkService', function($http) {
+	this.getDrinks = function(callback) {
 		$http.get('api/drink').success(function(data, status, headers, config) {
 			console.log("Received drinks.");
 			callback(data);
 		})
 	};
-	return service;
+
+	this.buyDrink = function(drink, callback) {
+	    $http.put('api/drink/' + drink.drinkId)
+	    .success(function(data, status, headers, config) {
+	        console.log("Purchased " + drink.drinkName);
+	        return true;
+	    }).error(function(data, status, headers, config) {
+            console.log("Drink could not be purchased. Response: " + data);
+            return false;
+        });
+	}
 }).
 factory('ingredientService', function($http) {
 	var service = {};
 	service.getIngredients = function(callback){
-		$http.get('api/ingredient').success(function(data, status, headers, config) {
+		$http.get('api/ingredient')
+		.success(function(data, status, headers, config) {
 			console.log("Received ingredients.");
 			callback(data);
 		})
 	}
 	
 	service.restockIngredient = function(ingredient, amount, callback) {
-		$http.put('api/ingredient/' + ingredient.ingredientId + "?amount=" + amount).success(function(data, status, headers, config) {
-			console.log("Ingredient restocked.");
+		$http.put('api/ingredient/' + ingredient.ingredientId + "?amount=" + amount)
+		.success(function(data, status, headers, config) {
+			console.log(ingredient.ingredientName + " restocked.");
 			callback(data);
 		})
 	}
 	
-	//TODO implement restockIngredients() for every ingredient
+	service.restockIngredients = function(ingredients, amount, callback) {
+	    for (var i = 0; i < ingredients.length; i++) {
+	        var ingredient = ingredients[i];
+	        $http.put('api/ingredient/' + ingredient.ingredientId + "?amount=" + amount)
+	        .success(function(data, status, headers, config) {
+	            console.log(ingredient.ingredientName + " restocked.");
+	            callback(data);
+	        }
+	    )}
+	}
 	
 	return service;
 });

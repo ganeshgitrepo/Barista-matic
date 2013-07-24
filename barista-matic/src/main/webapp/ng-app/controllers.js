@@ -9,7 +9,7 @@ app.controller('LoginCtrl', function ($scope, $location, userAuthService, userSe
     });
 
     $scope.login = function (user) {
-        if ($scope.user == undefined) {
+        if (typeof $scope.user === 'undefined') {
             return;
         }
         userAuthService.login($scope.user.username, $scope.user.password);
@@ -28,6 +28,14 @@ app.controller('DrinkCtrl', function ($scope, drinkService) {
     });
 
     $scope.buyDrink = function (drink) {
+        if (typeof drink === 'undefined') {
+            return;
+        }
+
+        drinkService.buyDrink(drink, function(response) {
+            console.log(response);
+        });
+
         $scope.selection = drink;
         console.log($scope.selection);
     };
@@ -44,11 +52,20 @@ app.controller('IngredientCtrl', function ($scope, ingredientService) {
         }
 
     $scope.restockIngredient = function (ingredient, amount) {
-        ingredientService.restockIngredient(ingredient, amount, function (response) {
+        if (typeof amount === 'undefined') {
+            return;
+        }
+
+        ingredientService.restockIngredient(ingredient, amount, function(response) {
             init();     // refresh ingredients from server
             ingredient.inventory = ingredient.inventory + parseInt(amount);
             $scope.selection = ingredient;
-            console.log($scope.selection.inventory);
+        })
+    };
+
+    $scope.restockIngredients = function(ingredients, amount) {
+        ingredientService.restockIngredients(ingredients, amount, function(response) {
+            init();
         })
     };
 });

@@ -1,6 +1,6 @@
 var app = angular.module('barista-matic', ['services']);
 // configure the routes and associate each view with a controller
-app.config(function ($routeProvider, $httpProvider) {
+app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/login',
             {
@@ -28,4 +28,6 @@ app.config(function ($routeProvider, $httpProvider) {
                 templateUrl:    'ng-app/partials/report.html'
             })
         .otherwise({redirectTo: '/login' });
+
+        //$locationProvider.html5Mode(true);
 });
