@@ -52,7 +52,7 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
             var customHeaders = 'Basic ' + base64;
             $http.defaults.headers.common['Authorization'] = customHeaders;
             $http.post('api/user/auth').success(function(data, status, headers, config) {
-                console.log("We are authenticated!");
+                console.log("User is authenticated.");
                 userService.setUserDetails(data.userId, username, customHeaders, data.role);
                 return true;
             }).error(function(data, status, headers, config) {
@@ -66,10 +66,7 @@ var services = angular.module('services', ['ngResource', 'ngCookies']).
 	}
 }).
 factory('drinkService', function($http) {
-
 	var service = {};
-
-	service = {};
 	service.getDrinks = function(callback) {
 		$http.get('api/drink').success(function(data, status, headers, config) {
 			console.log("Received drinks.");
@@ -88,7 +85,7 @@ factory('ingredientService', function($http) {
 	}
 	
 	service.restockIngredient = function(ingredient, amount, callback) {
-		$http.put('api/ingredient'.concat(ingredient.ingredientName).concat("?amount=" + amount)).success(function(data, status, headers, config) {
+		$http.put('api/ingredient/' + ingredient.ingredientId + "?amount=" + amount).success(function(data, status, headers, config) {
 			console.log("Ingredient restocked.");
 			callback(data);
 		})

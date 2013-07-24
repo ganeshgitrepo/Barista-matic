@@ -1,4 +1,4 @@
-app.controller('LoginCtrl',  function($scope, $location, userAuthService, userService) {
+app.controller('LoginCtrl', function ($scope, $location, userAuthService, userService) {
     $scope.$watch(function redirectUser() {
         var role = userService.getUserDetails().role;
         if (role == "CUSTOMER") {
@@ -8,7 +8,7 @@ app.controller('LoginCtrl',  function($scope, $location, userAuthService, userSe
         }
     });
 
-    $scope.login = function(user) {
+    $scope.login = function (user) {
         if ($scope.user == undefined) {
             return;
         }
@@ -16,45 +16,53 @@ app.controller('LoginCtrl',  function($scope, $location, userAuthService, userSe
     };
 });
 
-app.controller('LogoutCtrl', function($scope, $location, userAuthService) {
+app.controller('LogoutCtrl', function ($scope, $location, userAuthService) {
     userAuthService.logout();
     $location.path('/login').replace();
 });
 
-app.controller('DrinkCtrl', function($scope, drinkService) {
-	drinkService.getDrinks(function (response){
-	    console.log(response);
-	    $scope.drinks = response;
-	});
+app.controller('DrinkCtrl', function ($scope, drinkService) {
+    drinkService.getDrinks(function (response) {
+        console.log(response);
+        $scope.drinks = response;
+    });
 
-	$scope.buyDrink = function(drink){
-		$scope.selection = drink;
-		console.log($scope.selection);
-	};
+    $scope.buyDrink = function (drink) {
+        $scope.selection = drink;
+        console.log($scope.selection);
+    };
 });
 
-app.controller('IngredientCtrl', function($scope,ingredientService) {
-	ingredientService.getIngredients(function(response){
-		console.log(response);
-		$scope.ingredients = response;
-	});
+app.controller('IngredientCtrl', function ($scope, ingredientService) {
+        init();
 
-	$scope.restockIngredient = function(ingredient, amount, response) {
-		$scope.selection = ingredient;
-		console.log($scope.selection.inventory);
-	};
+        function init() {
+            ingredientService.getIngredients(function (response) {
+                console.log(response);
+                $scope.ingredients = response;
+            })
+        }
+
+    $scope.restockIngredient = function (ingredient, amount) {
+        ingredientService.restockIngredient(ingredient, amount, function (response) {
+            init();     // refresh ingredients from server
+            ingredient.inventory = ingredient.inventory + parseInt(amount);
+            $scope.selection = ingredient;
+            console.log($scope.selection.inventory);
+        })
+    };
 });
 
-app.controller('NavCtrl', function($scope, $location, userService) {
-	$scope.$watch(function showNav() {
-		$scope.isLoggedIn = userService.getUserDetails().isLoggedIn;
-		$scope.username = userService.getUserDetails().username;
-		if (userService.getUserDetails().role == "CUSTOMER") {
-			$scope.isCustomer = true;
-			$scope.isAdmin = false;
-		} else {
-			$scope.isAdmin = true;
-			$scope.isCustomer = false;
-		}
-	});
+app.controller('NavCtrl', function ($scope, $location, userService) {
+    $scope.$watch(function showNav() {
+        $scope.isLoggedIn = userService.getUserDetails().isLoggedIn;
+        $scope.username = userService.getUserDetails().username;
+        if (userService.getUserDetails().role == "CUSTOMER") {
+            $scope.isCustomer = true;
+            $scope.isAdmin = false;
+        } else {
+            $scope.isAdmin = true;
+            $scope.isCustomer = false;
+        }
+    });
 });
