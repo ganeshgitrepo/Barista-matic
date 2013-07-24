@@ -28,14 +28,14 @@ public class IngredientController {
     }
 
     @RequestMapping(value = "/{ingredientId}",  method=RequestMethod.PUT)
-    public @ResponseBody String restockIngredient(@PathVariable long ingredientId, @RequestParam(value="amount",
+    public @ResponseBody Ingredient restockIngredient(@PathVariable long ingredientId, @RequestParam(value="amount",
             required = true) int amount) throws IOException {
         Ingredient ingredient = ingredientService.findIngredient(ingredientId);
         if (ingredient == null)
             throw new IOException("Could not locate ingredient.");
         else {
             ingredientService.restockIngredient(ingredient.getIngredientName(), amount);
-            return "Restocked Ingredient" + ingredient.getIngredientName();
+            return ingredient;
         }
     }
 }
