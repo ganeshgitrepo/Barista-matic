@@ -12,7 +12,6 @@ import java.util.List;
 @Controller
 @RequestMapping(value="/ingredient")
 public class IngredientController {
-
     @Autowired
     private IngredientService ingredientService;
 
@@ -33,8 +32,14 @@ public class IngredientController {
         Ingredient ingredient = ingredientService.findIngredient(ingredientId);
         if (ingredient == null)
             throw new IOException("Could not locate ingredient.");
+        else if (amount < 0)
+            throw new IllegalStateException("Amount cannot be negative.");
         else {
-            ingredientService.restockIngredient(ingredient.getIngredientName(), amount);
+            int newInventory = ingredient.getInventory() + amount;
+            ingredient.setInventory(newInventory);
+            int newPurchases = ingredient.getPurchases() + amount;
+            ingredient.setPurchases(newPurchases);
+            ingredientService.saveOrUpdateIngredient(ingredient);
             return ingredient;
         }
     }

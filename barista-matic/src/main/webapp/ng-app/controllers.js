@@ -33,11 +33,8 @@ app.controller('DrinkCtrl', function ($scope, drinkService) {
         }
 
         drinkService.buyDrink(drink, function(response) {
-            console.log(response);
+            $scope.receipt = response;
         });
-
-        $scope.selection = drink;
-        console.log($scope.selection);
     };
 });
 
@@ -57,9 +54,8 @@ app.controller('IngredientCtrl', function ($scope, ingredientService) {
         }
 
         ingredientService.restockIngredient(ingredient, amount, function(response) {
-            init();     // refresh ingredients from server
-            ingredient.inventory = ingredient.inventory + parseInt(amount);
-            $scope.selection = ingredient;
+            init();
+            $scope.receipt = response;
         })
     };
 

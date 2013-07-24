@@ -77,16 +77,15 @@ service('drinkService', function($http) {
 	    $http.put('api/drink/' + drink.drinkId)
 	    .success(function(data, status, headers, config) {
 	        console.log("Purchased " + drink.drinkName);
-	        return true;
+	        callback("The cost of your order is " + $filter('currency')(drink.cost));
 	    }).error(function(data, status, headers, config) {
             console.log("Drink could not be purchased. Response: " + data);
-            return false;
+            callback("We're sorry, your order was not successful. Please try again later.");
         });
 	}
 }).
-factory('ingredientService', function($http) {
-	var service = {};
-	service.getIngredients = function(callback){
+service('ingredientService', function($http) {
+	this.getIngredients = function(callback){
 		$http.get('api/ingredient')
 		.success(function(data, status, headers, config) {
 			console.log("Received ingredients.");
@@ -94,15 +93,19 @@ factory('ingredientService', function($http) {
 		})
 	}
 	
-	service.restockIngredient = function(ingredient, amount, callback) {
+	this.restockIngredient = function(ingredient, amount, callback) {
 		$http.put('api/ingredient/' + ingredient.ingredientId + "?amount=" + amount)
 		.success(function(data, status, headers, config) {
 			console.log(ingredient.ingredientName + " restocked.");
-			callback(data);
+			callback("Successfully restocked " + data.ingredientName
+			    + ". Updated inventory is " + data.inventory);
+		}).error(function(data, status, headers, config) {
+		    console.log("Ingredient could not be restocked. Response: " + data);
+		    callback("We're sorry. Your restock request could not be processed.");
 		})
 	}
 	
-	service.restockIngredients = function(ingredients, amount, callback) {
+	this.restockIngredients = function(ingredients, amount, callback) {
 	    for (var i = 0; i < ingredients.length; i++) {
 	        var ingredient = ingredients[i];
 	        $http.put('api/ingredient/' + ingredient.ingredientId + "?amount=" + amount)
@@ -112,6 +115,4 @@ factory('ingredientService', function($http) {
 	        }
 	    )}
 	}
-	
-	return service;
 });

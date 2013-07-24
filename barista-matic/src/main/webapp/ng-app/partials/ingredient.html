@@ -3,10 +3,10 @@
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"
 			aria-hidden="true">&times;</button>
-		<h3 id="myModalLabel">Total Units</h3>
+		<h3 id="myModalLabel">Receipt</h3>
 	</div>
 	<div class="modal-body">
-		<p>Updated {{ selection.ingredientName }} inventory is {{ selection.inventory }}.</p>
+		<p>{{ receipt }}</p>
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">OK!</button>
@@ -25,11 +25,11 @@
 		<tr ng-repeat="ingredient in ingredients">
 			<td>{{ingredient.ingredientName}}</td>
 			<td>{{ingredient.inventory}}</td>
-			<td><input ng-model="ingredient.restockAmount" placeholder="Enter restocked amount"/></td>
+			<td><input ng-model="ingredient.restockAmount" placeholder="Enter amount to order"/></td>
 			<td>
 				<button id="{{ ingredient.ingredientName }}" type="submit" class="btn btn-mini btn-primary"
                         data-toggle="modal" data-target="#windowTitleDialog"
-                        ng-click="restockIngredient(ingredients, ingredient.restockAmount)">Restock Ingredient
+                        ng-click="restockIngredient(ingredient, ingredient.restockAmount)">Restock Ingredient
                 </button>
 			</td>
 		</tr>

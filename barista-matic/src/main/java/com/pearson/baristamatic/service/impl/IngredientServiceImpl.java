@@ -38,7 +38,7 @@ public class IngredientServiceImpl implements IngredientService {
 		ingredientDAO.saveOrUpdateIngredient(ingredient);
 	}
 
-	@Override
+/*	@Override
 	@Transactional(readOnly=false)
 	public void restockIngredient(String ingredientName, int amount) {
 		Ingredient ingredient = ingredientDAO.findIngredient(ingredientName);
@@ -60,8 +60,7 @@ public class IngredientServiceImpl implements IngredientService {
 			i.setPurchases(newPurchases);
 			ingredientDAO.saveOrUpdateIngredient(i);
 		}
-
-	}
+	}*/
 	
 	@Override
 	@Transactional(readOnly=false)
