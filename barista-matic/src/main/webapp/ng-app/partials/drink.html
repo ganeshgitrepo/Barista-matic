@@ -23,11 +23,10 @@
 		</thead>
 		<tr ng-repeat="drink in drinks">
 			<td>{{drink.drinkName}}</td>
-			<td>{{drink.cost}}</td>
+			<td>{{drink.cost | currency}}</td>
 			<td>
 				<button class="btn btn-mini btn-primary" data-toggle="modal"
-					data-target="#windowTitleDialog" ng-click="buyDrink (drink);">Buy
-					this !</button>
+					data-target="#windowTitleDialog" ng-click="buyDrink(drink);">Buy Drink</button>
 			</td>
 		</tr>
 	</table>
