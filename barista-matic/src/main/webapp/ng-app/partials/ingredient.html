@@ -27,12 +27,16 @@
 			<td>{{ingredient.inventory}}</td>
 			<td><input ng-model="ingredient.restockAmount" placeholder="Enter restocked amount"/></td>
 			<td>
-				<button id="{{ ingredient.ingredientName }}" type="submit" class="btn btn-mini btn-primary" data-toggle="modal"
-					data-target="#windowTitleDialog" ng-click="restockIngredient(ingredients, ingredient.restockAmount)">Restock Ingredient</button>
+				<button id="{{ ingredient.ingredientName }}" type="submit" class="btn btn-mini btn-primary"
+                        data-toggle="modal" data-target="#windowTitleDialog"
+                        ng-click="restockIngredient(ingredients, ingredient.restockAmount)">Restock Ingredient
+                </button>
 			</td>
 		</tr>
 	</table>
-	
-	<button type="submit" class="btn btn-primary"
-		data-target="#windowTitleDialog" ng-click="restockIngredients(ingredients, 10)">Restock All</button>
+</div>
+<div class="center">
+    <button type="submit" class="btn btn-primary"
+            data-target="#windowTitleDialog" ng-click="restockIngredients(ingredients, 10)">Restock All
+    </button>
 </div>
