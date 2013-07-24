@@ -15,8 +15,15 @@ public class ExceptionController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(IOException.class)
-    public @ResponseBody
-    Map<String, String> handleIOException(IOException ex) {
+    public @ResponseBody Map<String, String> handleIOException(IOException ex) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("Error", ex.getMessage());
+        return map;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalStateException.class)
+    public @ResponseBody Map<String, String> handleStateException(IllegalStateException ex) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("Error", ex.getMessage());
         return map;

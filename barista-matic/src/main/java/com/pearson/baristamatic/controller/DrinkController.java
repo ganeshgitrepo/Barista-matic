@@ -43,6 +43,6 @@ public class DrinkController {
             return map;
         }
         else
-            throw new IOException("Could not purchase drink.");
+            throw new IllegalStateException("Could not purchase drink.");
     }
 }
