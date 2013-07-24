@@ -19,7 +19,7 @@ public class DrinkController {
     @Autowired
     private DrinkService drinkService;
 
-    @RequestMapping(value="/", method=RequestMethod.GET)
+    @RequestMapping(value="", method=RequestMethod.GET)
     public @ResponseBody List<Drink> showAllDrinks() {
         return drinkService.findDrinks();
     }

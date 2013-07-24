@@ -6,7 +6,7 @@
 		<h3 id="myModalLabel">Bill</h3>
 	</div>
 	<div class="modal-body">
-		<p>The cost of your {{ selection.name }} is {{ selection.cost }} </p>
+		<p>The cost of your {{ selection.drinkName }} is {{ selection.cost }} </p>
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">OK!</button>
@@ -22,7 +22,7 @@
 			</tr>
 		</thead>
 		<tr ng-repeat="drink in drinks">
-			<td>{{drink.name}}</td>
+			<td>{{drink.drinkName}}</td>
 			<td>{{drink.cost}}</td>
 			<td>
 				<button class="btn btn-mini btn-primary" data-toggle="modal"
