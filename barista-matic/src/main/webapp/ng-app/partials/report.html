@@ -1,0 +1,38 @@
+<div class="container-fluid">
+
+	<div class="row-fluid">
+		<div class="report">
+			<h4>Orders</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width: 70$">Drink</th>
+						<th style="width: 30%"># Sold</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="(ingredient, purchases) in orders">
+					<td>{{ ingredient }}</td>
+					<td>{{ purchases }}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="report">
+			<h4>Financials</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width: 70%"></th>
+						<th style="width: 30%"></th>
+					</tr>
+				</thead>
+				<tr ng-repeat="(Revenue, Profit) in financials">
+					<td>{{ Revenue }}</td>
+					<td>{{ Profit }}</td>
+
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
