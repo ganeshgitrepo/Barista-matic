@@ -12,6 +12,11 @@ app.config(function ($routeProvider, $locationProvider) {
                 controller:     'LogoutCtrl',
                 templateUrl:    'ng-app/partials/login.html'
             })
+        .when('/register',
+            {
+                controller:     'RegisterCtrl',
+                templateUrl:    'ng-app/partials/register.html'
+            })
         .when('/drink',
             {
                 controller:     'DrinkCtrl',

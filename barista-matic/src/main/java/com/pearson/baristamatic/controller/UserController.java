@@ -47,11 +47,9 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value="", method= RequestMethod.POST)
-    public @ResponseBody Map<String, Long> registerUser(User user) {
+    public @ResponseBody Map<String, String> registerUser(User user) {
         userService.saveOrUpdateUser(user);
-        Map<String, Long> map = new HashMap<String, Long>();
-        map.put("Created user", user.getUserId());
-        return map;
+        return getAuthenticatedUser();
     }
 
 }

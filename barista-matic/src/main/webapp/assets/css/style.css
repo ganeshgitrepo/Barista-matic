@@ -15,7 +15,8 @@ body {
 	background-repeat: repeat-x;
 }
 
-.form-signin {
+.form-signin,
+ .form-register {
 	max-width: 300px;
 	padding: 19px 29px 29px;
 	margin: 100px auto 20px;
@@ -34,7 +35,9 @@ body {
 }
 
 .form-signin input[type="text"],
-.form-signin input[type="password"] {
+.form-signin input[type="password"],
+.form-register input[type="text"],
+.form-register input[type="password"] {
 	font-size: 16px;
 	height: auto;
 	margin-bottom: 15px;

@@ -1,22 +1,23 @@
 <div class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavCtrl" ng-show="isLoggedIn">
     <div class="navbar-inner">
-        <div>
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" />
-            <a class="brand span2" href="#/">Barista-matic</a>
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            </button>
+            <a class="brand" href="#/">Barista-matic</a>
             <div class="nav-collapse collapse">
                 <!-- Customer links -->
                 <ul class="nav" ng-show="isCustomer">
-                    <li><a href="#/drink">Order Drinks</a></li>
+                    <li ng-class="isDrinkActive" class="active"><a href="#/drink">Order Drinks</a></li>
                 </ul>
                 <ul class="nav" ng-show="isAdmin">
                     <!-- Administrator links -->
-                    <li><a href="#/ingredient">Restock Ingredients</a></li>
-                    <li><a href="#/report">View Report</a></li>
+                    <li ng-class="isIngredientActive"><a href="#/ingredient">Restock Ingredients</a></li>
+                    <li ng-class="isReportActive"><a href="#/report">View Report</a></li>
                 </ul>
-                    <ul class="nav pull-right">
-                        <li class="active navbar-text">Welcome, {{username}}!</li>
-                        <li><a href="#/logout">Logout</a></li>
-                    </ul>
+                <ul class="nav pull-right">
+                    <li class="active navbar-text">Welcome, {{username}}!</li>
+                    <li><a href="#/logout">Logout</a></li>
+                </ul>
             </div><!--/.nav-collapse -->
         </div>
     </div>

@@ -1,0 +1,11 @@
+<form class="form-signin" ng-submit="login(user)">
+    <h2 class="form-signin-heading">Enter your information</h2>
+    <input type="text" class="input-block-level" ng-model="user.username" placeholder="User name">
+    <input type="password" class="input-block-level" ng-model="user.password" placeholder="Password">
+    <input type="passwordVerify" class="input-block-level" ng-model="user.passwordVerify" placeholder="Verify password">
+    <input class="btn btn-large btn-primary" type="submit" value="Sign in" />
+    <a href="register" class="btn btn-large">Register</a>
+</form>
+<div class="loginMessage alert alert-error" ng-show="loginMsg">
+    <p>{{ loginMsg }}</p>
+</div>
