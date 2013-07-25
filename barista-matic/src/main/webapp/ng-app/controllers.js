@@ -93,7 +93,7 @@ app.controller('ReportCtrl', function ($scope, orderService, financialService) {
 });
 
 app.controller('NavCtrl', function ($scope, $location, userService) {
-    $scope.$on('$routeUpdate', function() {
+    $scope.$on('$routeChangeSuccess', function($rootScope) {
         if ($location.path().indexOf("drink") !== -1) {
             $scope.isDrinkActive = 'active';
         } else {
